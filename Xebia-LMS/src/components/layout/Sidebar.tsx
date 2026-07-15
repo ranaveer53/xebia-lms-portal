@@ -59,7 +59,7 @@ export default function Sidebar({ isOpen, onClose, collapsed, onCollapseToggle }
     { name: "Profile", href: "/profile", icon: User }
   ];
 
-  const links = userRole === "teacher" ? teacherLinks : learnerLinks;
+  const links = (userRole === "teacher" || userRole === "admin") ? teacherLinks : learnerLinks;
 
   const handleLogout = () => {
     logout();
@@ -124,7 +124,7 @@ export default function Sidebar({ isOpen, onClose, collapsed, onCollapseToggle }
           <nav className="p-4 flex flex-col gap-1.5">
             {!collapsed && (
               <span className="px-4 text-[10px] font-black text-text-muted uppercase tracking-wider block mb-2 mt-2 animate-fadeIn">
-                {userRole === "teacher" ? "Instructor Space" : "Learner Space"}
+                {userRole === "admin" ? "Admin Space" : userRole === "teacher" ? "Instructor Space" : "Learner Space"}
               </span>
             )}
             {links.map((link) => {

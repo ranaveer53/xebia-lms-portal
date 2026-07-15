@@ -131,7 +131,7 @@ export default function AssessmentsPage() {
   const filteredAssessments = assessments.filter((a) => {
     if (search && !a.title.toLowerCase().includes(search.toLowerCase()) && !a.subject.toLowerCase().includes(search.toLowerCase())) return false;
     
-    if (userRole === "teacher") {
+    if (userRole === "teacher" || userRole === "admin") {
       if (statusFilter === "draft" && a.status !== "draft") return false;
       if (statusFilter === "published" && a.status !== "published") return false;
     } else {
@@ -139,7 +139,7 @@ export default function AssessmentsPage() {
       if (a.status !== "published") return false;
     }
 
-    if (userRole === "learner") {
+    if (userRole !== "teacher" && userRole !== "admin") {
       const studentBatch = (currentUser?.batch || "Batch A").trim().toLowerCase();
       const hasBatch = (a.batches && a.batches.some(b => b.trim().toLowerCase() === studentBatch)) 
                     || (a.batch && a.batch.trim().toLowerCase() === studentBatch);
@@ -170,10 +170,10 @@ export default function AssessmentsPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-foreground">
-            {userRole === "teacher" ? "Curriculum Assessments" : "My Assigned Assessments"}
+            {userRole === "teacher" || userRole === "admin" ? "Curriculum Assessments" : "My Assigned Assessments"}
           </h1>
           <p className="text-xs text-text-muted font-semibold mt-1">
-            {userRole === "teacher"
+            {userRole === "teacher" || userRole === "admin"
               ? "Create interactive MCQ tests or upload external files for review."
               : "Solve scheduled quizzes, upload materials, and review scores."}
           </p>
@@ -184,11 +184,11 @@ export default function AssessmentsPage() {
           onTimeChange={setTimeFilter}
           selectedBatch={batchFilter}
           onBatchChange={setBatchFilter}
-          hideBatch={userRole === "learner"}
+          hideBatch={userRole !== "teacher" && userRole !== "admin"}
         />
       </div>
 
-      {userRole === "teacher" && (
+      {(userRole === "teacher" || userRole === "admin") && (
         <div className="flex gap-2 border-b border-border/50 pb-2">
           {(["all", "draft", "published"] as const).map((tab) => (
             <button
@@ -218,7 +218,7 @@ export default function AssessmentsPage() {
           />
         </div>
 
-        {userRole === "teacher" && (
+        {(userRole === "teacher" || userRole === "admin") && (
           <div className="flex items-center gap-3 w-full md:w-auto">
             <button
               onClick={() => router.push("/assessments/create")}
@@ -292,7 +292,7 @@ export default function AssessmentsPage() {
 
               {/* Action bar */}
               <div className="border-t border-border/50 pt-4 mt-6 flex justify-between items-center">
-                {userRole === "teacher" ? (
+                {userRole === "teacher" || userRole === "admin" ? (
                   <>
                     <span className={`text-[10px] font-black uppercase px-2.5 py-1 rounded-full border ${
                       item.status === "published" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-amber-50 text-amber-700 border-amber-100"

@@ -133,7 +133,7 @@ export default function MaterialsPage() {
         <div>
           <h1 className="text-2xl font-black text-foreground">Course Reference Materials</h1>
           <p className="text-xs text-text-muted font-semibold mt-1">
-            {userRole === "teacher"
+            {userRole === "teacher" || userRole === "admin"
               ? "Share PDF slide decks, cheat sheets, or exercise guides with enrolled batches."
               : "Access textbooks, cheat sheets, slide decks, and reference files uploaded by the instructor."}
           </p>
@@ -144,7 +144,7 @@ export default function MaterialsPage() {
           onTimeChange={setTimeFilter}
           selectedBatch={batchFilter}
           onBatchChange={setBatchFilter}
-          hideBatch={userRole === "learner"}
+          hideBatch={userRole !== "teacher" && userRole !== "admin"}
         />
       </div>
 
@@ -161,7 +161,7 @@ export default function MaterialsPage() {
           />
         </div>
 
-        {userRole === "teacher" && (
+        {(userRole === "teacher" || userRole === "admin") && (
           <button
             onClick={() => setShowUploadModal(true)}
             className="bg-primary hover:bg-primary-dark text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center gap-2 cursor-pointer shadow-xs transition-all w-full md:w-auto justify-center"
@@ -184,7 +184,7 @@ export default function MaterialsPage() {
                   <div className="w-10 h-10 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary flex-shrink-0">
                     <FileText size={20} />
                   </div>
-                  {userRole === "teacher" && (
+                  {(userRole === "teacher" || userRole === "admin") && (
                     <button
                       onClick={() => handleDelete(item.id)}
                       className="p-1.5 border border-border rounded-lg text-rose-500 hover:bg-rose-50 hover:border-rose-100 cursor-pointer"

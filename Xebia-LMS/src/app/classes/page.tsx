@@ -23,10 +23,10 @@ export default function ClassesPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-foreground">
-            {userRole === "teacher" ? "Class Directories" : "My Active Classes"}
+            {userRole === "teacher" || userRole === "admin" ? "Class Directories" : "My Active Classes"}
           </h1>
           <p className="text-xs text-text-muted font-semibold mt-1">
-            {userRole === "teacher"
+            {userRole === "teacher" || userRole === "admin"
               ? "Manage batch assignments, course topics, and schedules."
               : "Access your current lectures, study materials, and virtual links."}
           </p>
@@ -69,7 +69,7 @@ export default function ClassesPage() {
                   <div className="flex items-center gap-2 text-xs text-foreground font-semibold">
                     <Users size={16} className="text-primary" />
                     <span>
-                      {userRole === "teacher" ? "28 Registered" : `Instructor: ${cls.teacherName}`}
+                      {userRole === "teacher" || userRole === "admin" ? "28 Registered" : `Instructor: ${cls.teacherName}`}
                     </span>
                   </div>
                 </div>
@@ -78,7 +78,7 @@ export default function ClassesPage() {
               <div className="border-t border-border/50 pt-4 mt-6 flex justify-between items-center">
                 <span className="text-xs font-bold text-text-muted uppercase tracking-wider">{cls.time}</span>
                 <button className="bg-primary hover:bg-primary-dark text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer shadow-xs">
-                  {userRole === "teacher" ? "Manage Students" : "Join Lecture"}
+                  {userRole === "teacher" || userRole === "admin" ? "Manage Students" : "Join Lecture"}
                 </button>
               </div>
             </div>

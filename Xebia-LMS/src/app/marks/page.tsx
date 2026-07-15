@@ -36,10 +36,10 @@ export default function MarksPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-foreground">
-            {userRole === "teacher" ? "Academic Grades Board" : "My Graded Scorecards"}
+            {userRole === "teacher" || userRole === "admin" ? "Academic Grades Board" : "My Graded Scorecards"}
           </h1>
           <p className="text-xs text-text-muted font-semibold mt-1">
-            {userRole === "teacher"
+            {userRole === "teacher" || userRole === "admin"
               ? "Review overall candidate performance metrics and feedback sheets."
               : "Review your scored marks, performance breakdowns, and instructor feedback."}
           </p>
@@ -50,7 +50,7 @@ export default function MarksPage() {
           onTimeChange={setTimeFilter}
           selectedBatch={batchFilter}
           onBatchChange={setBatchFilter}
-          hideBatch={userRole === "learner"}
+          hideBatch={userRole !== "teacher" && userRole !== "admin"}
         />
       </div>
 
@@ -61,7 +61,7 @@ export default function MarksPage() {
           <div className="space-y-1">
             <span className="text-[10px] font-black text-white/70 uppercase tracking-widest block">Summary stats</span>
             <h2 className="text-xl font-black">
-              {userRole === "teacher" ? "Class Average score: 86.4%" : "Your Completed track is active."}
+              {userRole === "teacher" || userRole === "admin" ? "Class Average score: 86.4%" : "Your Completed track is active."}
             </h2>
           </div>
           <div className="flex items-center gap-3">
@@ -77,7 +77,7 @@ export default function MarksPage() {
       </div>
 
       {/* Search Input */}
-      {userRole === "teacher" && (
+      {(userRole === "teacher" || userRole === "admin") && (
         <div className="bg-white border border-border p-4 rounded-2xl shadow-xs flex items-center gap-3">
           <Search size={18} className="text-text-muted" />
           <input
@@ -110,7 +110,7 @@ export default function MarksPage() {
                     <h3 className="font-black text-lg text-foreground mt-3 leading-tight">
                       {grade.assessmentTitle}
                     </h3>
-                    {userRole === "teacher" && (
+                    {(userRole === "teacher" || userRole === "admin") && (
                       <span className="text-xs font-bold text-primary block mt-1">Student: {grade.learnerName}</span>
                     )}
                   </div>
