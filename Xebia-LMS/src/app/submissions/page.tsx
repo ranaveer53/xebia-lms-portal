@@ -52,6 +52,7 @@ function SubmissionsPageContent() {
   const [marksInput, setMarksInput] = useState<number>(0);
   const [feedbackInput, setFeedbackInput] = useState("");
   const [gradingError, setGradingError] = useState("");
+  const [gradingLoading, setGradingLoading] = useState(false);
 
   // Bulk Grade modal state
   const [bulkGradeOpen, setBulkGradeOpen] = useState(false);
@@ -103,8 +104,16 @@ function SubmissionsPageContent() {
       return;
     }
 
-    await gradeSubmission(selectedSub.id, marksInput, feedbackInput);
-    setSelectedSub(null);
+    setGradingLoading(true);
+    setGradingError("");
+    try {
+      await gradeSubmission(selectedSub.id, marksInput, feedbackInput);
+      setSelectedSub(null);
+    } catch (err: any) {
+      setGradingError(err.message || "Failed to publish score. Please check your connection and try again.");
+    } finally {
+      setGradingLoading(false);
+    }
   };
 
   // Bulk Operations Handlers
@@ -729,9 +738,14 @@ function SubmissionsPageContent() {
 
                 <button
                   type="submit"
-                  className="bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl text-xs uppercase cursor-pointer shadow-xs text-center w-full transition-all"
+                  disabled={gradingLoading}
+                  className="bg-primary hover:bg-primary-dark disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl text-xs uppercase cursor-pointer shadow-xs text-center w-full transition-all flex items-center justify-center gap-2"
                 >
-                  Publish Score
+                  {gradingLoading ? (
+                    <><span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />Publishing...</>
+                  ) : (
+                    "Publish Score"
+                  )}
                 </button>
               </div>
             </form>
