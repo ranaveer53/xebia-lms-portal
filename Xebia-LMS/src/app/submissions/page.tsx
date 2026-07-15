@@ -72,10 +72,10 @@ function SubmissionsPageContent() {
     });
   }, [selectedAssessmentId, selectedBatches, selectedStatus, searchQuery, selectedTimeFilter, sortBy]);
 
-  if (userRole !== "teacher") {
+  if (userRole !== "teacher" && userRole !== "admin") {
     return (
       <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs font-bold text-rose-600">
-        Access Denied. Only instructors can review student submissions.
+        Access Denied. Only instructors and administrators can review student submissions.
       </div>
     );
   }

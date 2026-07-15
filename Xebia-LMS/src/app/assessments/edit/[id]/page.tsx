@@ -101,10 +101,10 @@ export default function EditAssessmentPage() {
 
   const userRole = currentUser?.role || "learner";
 
-  if (userRole !== "teacher") {
+  if (userRole !== "teacher" && userRole !== "admin") {
     return (
       <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs font-bold text-rose-600">
-        Access Denied. Only instructors can build assessments.
+        Access Denied. Only instructors and administrators can build assessments.
       </div>
     );
   }

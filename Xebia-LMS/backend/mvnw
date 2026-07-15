@@ -3,7 +3,7 @@ MAVEN_VERSION="3.9.6"
 MAVEN_HOME="$(dirname "$0")/.mvn/apache-maven-$MAVEN_VERSION"
 MAVEN_ZIP="$(dirname "$0")/.mvn/maven-$MAVEN_VERSION-bin.zip"
 
-if [ ! -d "$MAVEN_HOME" ]; then
+if [ ! -f "$MAVEN_HOME/bin/mvn" ]; then
     echo "Maven wrapper: Downloading Apache Maven $MAVEN_VERSION..."
     mkdir -p "$(dirname "$0")/.mvn"
     curl -sfL "https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.zip" -o "$MAVEN_ZIP"
