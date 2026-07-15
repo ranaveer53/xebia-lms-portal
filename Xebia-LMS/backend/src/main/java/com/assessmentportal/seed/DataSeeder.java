@@ -21,18 +21,21 @@ public class DataSeeder implements CommandLineRunner {
     private final AssessmentRepository assessmentRepository;
     private final SubmissionRepository submissionRepository;
     private final MaterialRepository materialRepository;
+    private final BatchRepository batchRepository;
 
     public DataSeeder(
             UserRepository userRepository,
             ClassInfoRepository classInfoRepository,
             AssessmentRepository assessmentRepository,
             SubmissionRepository submissionRepository,
-            MaterialRepository materialRepository) {
+            MaterialRepository materialRepository,
+            BatchRepository batchRepository) {
         this.userRepository = userRepository;
         this.classInfoRepository = classInfoRepository;
         this.assessmentRepository = assessmentRepository;
         this.submissionRepository = submissionRepository;
         this.materialRepository = materialRepository;
+        this.batchRepository = batchRepository;
     }
 
     private void createUploadDirAndDummyFiles() {
@@ -97,12 +100,15 @@ public class DataSeeder implements CommandLineRunner {
                 createUploadDirAndDummyFiles();
                 seedUsers();
                 seedClasses();
+                seedBatches();
                 seedAssessments();
                 seedSubmissions();
                 seedMaterials();
                 System.out.println("[DataSeeder] Seeding complete.");
             } else {
                 System.out.println("[DataSeeder] MongoDB already contains user data. Skipping re-seeding to prevent data loss.");
+                // Always ensure default batches exist even if DB was already seeded
+                ensureDefaultBatchesExist();
             }
         } catch (Exception e) {
             System.err.println("[DataSeeder] WARNING: MongoDB is offline or connection timed out. MongoDB features will be unavailable: " + e.getMessage());
@@ -129,6 +135,41 @@ public class DataSeeder implements CommandLineRunner {
         userRepository.save(new User(
                 "u-learner", "Xebia Consultant", "learner@xebia.com", "learner",
                 "", "learner123", "Batch B", "XEB003"));
+    }
+
+    private void seedBatches() {
+        String now = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_DATE_TIME);
+        String[][] batches = {
+            {"b-1", "Batch A", "UI/UX Design", "Design Principles"},
+            {"b-2", "Batch B", "Front-end Development", "React & Next.js"},
+            {"b-3", "Batch C", "Back-end Development", "Node.js & Express"},
+            {"b-4", "Batch D", "Project Management", "Agile & Scrum"}
+        };
+        for (String[] b : batches) {
+            if (!batchRepository.findById(b[0]).isPresent()) {
+                Batch batch = new Batch();
+                batch.setId(b[0]);
+                batch.setBatchName(b[1]);
+                batch.setCourse(b[2]);
+                batch.setSubject(b[3]);
+                batch.setCreatedAt(now);
+                batch.setUpdatedAt(now);
+                batchRepository.save(batch);
+            }
+        }
+    }
+
+    private void ensureDefaultBatchesExist() {
+        // If the batches collection is empty, seed default batches
+        // This handles cases where existing DBs were seeded before batch support was added
+        try {
+            if (batchRepository.count() == 0) {
+                System.out.println("[DataSeeder] Batches collection is empty. Seeding default batches...");
+                seedBatches();
+            }
+        } catch (Exception e) {
+            System.err.println("[DataSeeder] Could not check/seed batches: " + e.getMessage());
+        }
     }
 
     private void seedClasses() {

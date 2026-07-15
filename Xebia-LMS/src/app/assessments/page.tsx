@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useApp } from "../../lib/context";
 import { Assessment, Submission, Certificate, ScorecardResponse } from "../../types";
 import Filters from "../../components/filters/Filters";
@@ -37,11 +37,24 @@ export default function AssessmentsPage() {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploadTitle, setUploadTitle] = useState("");
   const [uploadSubject, setUploadSubject] = useState("");
-  const [uploadBatches, setUploadBatches] = useState<string[]>(["Batch A"]);
+  const [uploadBatches, setUploadBatches] = useState<string[]>([]);
   const [uploadBatchDropdownOpen, setUploadBatchDropdownOpen] = useState(false);
   const [uploadBatchSearch, setUploadBatchSearch] = useState("");
   const [uploadDeadline, setUploadDeadline] = useState("");
   const [uploadFile, setUploadFile] = useState<File | null>(null);
+
+  // Dynamic batch list from backend
+  const [allBatchNames, setAllBatchNames] = useState<string[]>([]);
+  useEffect(() => {
+    apiService.getBatches()
+      .then(batches => {
+        const names = batches.map(b => b.batchName).filter(Boolean);
+        setAllBatchNames(names.length > 0 ? names : ["Batch A", "Batch B", "Batch C", "Batch D"]);
+      })
+      .catch(() => {
+        setAllBatchNames(["Batch A", "Batch B", "Batch C", "Batch D"]);
+      });
+  }, []);
 
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
@@ -119,7 +132,7 @@ export default function AssessmentsPage() {
       setShowUploadModal(false);
       setUploadTitle("");
       setUploadSubject("");
-      setUploadBatches(["Batch A"]);
+      setUploadBatches([]);
       setUploadFile(null);
     } catch (err) {
       console.error("Error uploading file / saving assessment:", err);
@@ -493,11 +506,11 @@ export default function AssessmentsPage() {
                         <input
                           type="checkbox"
                           id="select-all-modal-batches"
-                          checked={uploadBatches.length === 4}
+                          checked={allBatchNames.length > 0 && uploadBatches.length === allBatchNames.length}
                           onClick={(e) => e.stopPropagation()}
                           onChange={(e) => {
                             if (e.target.checked) {
-                              setUploadBatches(["Batch A", "Batch B", "Batch C", "Batch D"]);
+                              setUploadBatches([...allBatchNames]);
                             } else {
                               setUploadBatches([]);
                             }
@@ -509,7 +522,7 @@ export default function AssessmentsPage() {
                         </label>
                       </div>
                       <div className="space-y-1 pt-1">
-                        {["Batch A", "Batch B", "Batch C", "Batch D"].filter(b => b.toLowerCase().includes(uploadBatchSearch.toLowerCase())).map(b => (
+                        {allBatchNames.filter(b => b.toLowerCase().includes(uploadBatchSearch.toLowerCase())).map(b => (
                           <div key={b} className="flex items-center gap-2">
                             <input
                               type="checkbox"
