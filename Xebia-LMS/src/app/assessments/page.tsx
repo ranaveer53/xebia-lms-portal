@@ -140,10 +140,15 @@ export default function AssessmentsPage() {
     }
 
     if (userRole !== "teacher" && userRole !== "admin") {
-      const studentBatch = (currentUser?.batch || "Batch A").trim().toLowerCase();
-      const hasBatch = (a.batches && a.batches.some(b => b.trim().toLowerCase() === studentBatch)) 
-                    || (a.batch && a.batch.trim().toLowerCase() === studentBatch);
-      if (!hasBatch) return false;
+      // If learner has no batch set, show all published assessments
+      // If learner has a batch, only show assessments assigned to their batch
+      const studentBatch = currentUser?.batch?.trim();
+      if (studentBatch) {
+        const batchLower = studentBatch.toLowerCase();
+        const hasBatch = (a.batches && a.batches.some(b => b.trim().toLowerCase() === batchLower)) 
+                      || (a.batch && a.batch.trim().toLowerCase() === batchLower);
+        if (!hasBatch) return false;
+      }
     } else {
       if (batchFilter !== "All Batches") {
         const selectedBatch = batchFilter.trim().toLowerCase();

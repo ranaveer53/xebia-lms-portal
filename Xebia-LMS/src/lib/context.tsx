@@ -57,6 +57,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   }, [session, status]);
 
+  // Helper: get the batch param to pass to the API for a learner
+  // If learner has no batch set, pass undefined so we get ALL published assessments
+  // (the frontend will filter by batch client-side using the assessment's batches array)
+  const getLearnerBatchParam = (user: User | null): string | undefined => {
+    if (!user || user.role !== "learner") return undefined;
+    return user.batch && user.batch.trim() !== "" ? user.batch.trim() : undefined;
+  };
+
   // Load initial data on mount/user change
   useEffect(() => {
     async function loadData() {
@@ -68,9 +76,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       try {
-        const userBatch = currentUser.role === "learner" ? currentUser.batch : undefined;
+        const userBatch = getLearnerBatchParam(currentUser);
         const results = await Promise.allSettled([
           apiService.getClasses(),
+          // For learners with no batch, fetch all published assessments (no batch filter)
+          // so admin-created multi-batch assessments are visible.
           apiService.getAssessments(userBatch, undefined, undefined, currentUser.role),
           apiService.getSubmissions(userBatch ? { batches: [userBatch] } : undefined),
           apiService.getMaterials(userBatch),
@@ -123,21 +133,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     } else {
       await apiService.savePublishAssessment(assessment);
     }
-    const userBatch = currentUser?.role === "learner" ? currentUser.batch : undefined;
+    const userBatch = getLearnerBatchParam(currentUser);
     const updated = await apiService.getAssessments(userBatch, undefined, undefined, currentUser?.role || "learner");
     setAssessments(updated);
   };
 
   const handlePublishAssessment = async (id: string) => {
     await apiService.publishAssessmentById(id);
-    const userBatch = currentUser?.role === "learner" ? currentUser.batch : undefined;
+    const userBatch = getLearnerBatchParam(currentUser);
     const updated = await apiService.getAssessments(userBatch, undefined, undefined, currentUser?.role || "learner");
     setAssessments(updated);
   };
 
   const handleDeleteAssessment = async (id: string) => {
     await apiService.deleteAssessment(id);
-    const userBatch = currentUser?.role === "learner" ? currentUser.batch : undefined;
+    const userBatch = getLearnerBatchParam(currentUser);
     const updated = await apiService.getAssessments(userBatch, undefined, undefined, currentUser?.role || "learner");
     setAssessments(updated);
   };

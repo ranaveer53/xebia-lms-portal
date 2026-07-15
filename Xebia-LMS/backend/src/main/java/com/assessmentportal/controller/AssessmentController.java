@@ -60,9 +60,6 @@ public class AssessmentController {
 
         // Apply status and role filters
         if ("learner".equalsIgnoreCase(role)) {
-            if (batch == null || batch.isEmpty() || batch.equals("All Batches")) {
-                return java.util.Collections.emptyList();
-            }
             // Learners can ONLY see published assessments (case-insensitive)
             assessments = assessments.stream()
                     .filter(a -> "published".equalsIgnoreCase(a.getStatus()))
