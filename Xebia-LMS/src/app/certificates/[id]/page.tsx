@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, use } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect, use, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { apiService } from "../../../lib/apiService";
 import { Certificate } from "../../../types";
 import CertificateTemplate from "../../../components/certificates/CertificateTemplate";
@@ -20,6 +20,8 @@ export default function CertificatePreviewPage({ params }: CertificatePreviewPag
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
   const [scale, setScale] = useState(0.8);
+  const searchParams = useSearchParams();
+  const autoDownloadDone = useRef(false);
 
   // Fetch certificate details
   useEffect(() => {
@@ -37,6 +39,16 @@ export default function CertificatePreviewPage({ params }: CertificatePreviewPag
         });
     }
   }, [certificateId, router]);
+
+  // Auto-trigger download if ?download=true is in URL
+  useEffect(() => {
+    if (!loading && certificate && searchParams.get("download") === "true" && !autoDownloadDone.current) {
+      autoDownloadDone.current = true;
+      // Small delay to let the certificate render fully before capturing
+      setTimeout(() => handleDownloadPDF(), 800);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, certificate, searchParams]);
 
   // Handle scaling based on viewport size
   useEffect(() => {

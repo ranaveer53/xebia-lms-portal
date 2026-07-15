@@ -21,8 +21,9 @@ export default function MarksPage() {
     
     if (userRole === "learner") {
       if (s.learnerId !== userId) return false;
-      const studentBatch = currentUser?.batch || "Batch A";
-      if (s.batch !== studentBatch) return false;
+      // Only filter by batch if the learner has one set; otherwise show all their submissions
+      const studentBatch = currentUser?.batch?.trim();
+      if (studentBatch && s.batch && s.batch.trim().toLowerCase() !== studentBatch.toLowerCase()) return false;
     } else {
       if (batchFilter !== "All Batches" && s.batch !== batchFilter) return false;
     }

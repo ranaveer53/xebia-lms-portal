@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { useApp } from "../../lib/context";
 import Filters from "../../components/filters/Filters";
 import { UserCheck, Mail, BookOpen, Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function LearnersPage() {
+  const router = useRouter();
   const { currentUser } = useApp();
   const [timeFilter, setTimeFilter] = useState("All");
   const [batchFilter, setBatchFilter] = useState("All Batches");
@@ -109,7 +111,12 @@ export default function LearnersPage() {
                 <BookOpen size={14} className="text-primary" />
                 <span>{student.completed} Assessments Done</span>
               </div>
-              <button className="text-primary hover:underline">Profile</button>
+              <button
+                onClick={() => router.push(`/submissions?learnerId=${student.id}`)}
+                className="text-primary hover:underline cursor-pointer"
+              >
+                Profile
+              </button>
             </div>
           </div>
         ))}

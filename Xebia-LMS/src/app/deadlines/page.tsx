@@ -21,8 +21,10 @@ export default function DeadlinesPage() {
   const filteredDeadlines = publishedAssessments
     .filter((a) => {
       if (userRole === "learner") {
-        const studentBatch = currentUser?.batch || "Batch A";
-        return a.batches?.includes(studentBatch) || a.batch === studentBatch;
+        const studentBatch = currentUser?.batch?.trim();
+        if (!studentBatch) return true; // no batch = see all published
+        const bl = studentBatch.toLowerCase();
+        return a.batches?.some(b => b.trim().toLowerCase() === bl) || (a.batch?.trim().toLowerCase() === bl);
       }
       if (batchFilter !== "All Batches") {
         return a.batches?.includes(batchFilter) || a.batch === batchFilter;

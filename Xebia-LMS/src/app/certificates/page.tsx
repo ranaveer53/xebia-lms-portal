@@ -33,13 +33,8 @@ export default function CertificatesPage() {
     }
   }, [userId, userRole]);
 
-  if (userRole !== "learner") {
-    return (
-      <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs font-bold text-rose-600">
-        Access Denied. Only student candidates can view certificates.
-      </div>
-    );
-  }
+  // Admins and teachers can also view the certificates list
+  // Only redirect completely unauthenticated users
 
   return (
     <div className="space-y-6">
@@ -141,7 +136,7 @@ export default function CertificatesPage() {
                   <Eye size={14} /> View Certificate
                 </button>
                 <button
-                  onClick={() => router.push(`/certificates/${cert.id}`)}
+                  onClick={() => router.push(`/certificates/${cert.id}?download=true`)}
                   className="flex-1 bg-[#84117C] hover:bg-[#6c0e66] text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer shadow-xs transition-all text-center uppercase"
                 >
                   <Download size={14} /> Download PDF

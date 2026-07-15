@@ -348,12 +348,11 @@ function SubmissionsPageContent() {
               className="w-full bg-[#F7F8FC] border border-border rounded-xl px-3 py-2.5 text-xs outline-none focus:border-primary font-semibold cursor-pointer"
             >
               <option value="All">All Statuses</option>
-              <option value="Pending Submission">Pending Submission</option>
-              <option value="Submitted">Submitted</option>
-              <option value="Reviewed">Reviewed</option>
-              <option value="Graded">Graded</option>
-              <option value="Late Submission">Late Submission</option>
-              <option value="Missing Submission">Missing Submission</option>
+              <option value="submitted">Submitted</option>
+              <option value="marked">Marked / Graded</option>
+              <option value="Auto Graded">Auto Graded</option>
+              <option value="late">Late Submission</option>
+              <option value="missing">Missing Submission</option>
             </select>
           </div>
 

@@ -34,7 +34,7 @@ export default function ProfilePage() {
             <div>
               <h2 className="text-lg font-black text-foreground">{userName}</h2>
               <span className="text-[10px] text-text-muted font-black uppercase tracking-wider block mt-1">
-                {userRole === "teacher" ? "Principal Instructor" : "Batch Learner Candidate"}
+                {userRole === "admin" ? "Portal Administrator" : userRole === "teacher" ? "Principal Instructor" : "Batch Learner Candidate"}
               </span>
             </div>
           </div>
@@ -48,10 +48,10 @@ export default function ProfilePage() {
               <Shield size={16} className="text-accent" />
               <span className="capitalize">{userRole} Role Permissions</span>
             </div>
-            {userRole === "learner" && (
+            {userRole === "learner" && currentUser?.batch && (
               <div className="flex items-center gap-3">
                 <Layers size={16} className="text-cta" />
-                <span>Enrolled in: Batch A</span>
+                <span>Enrolled in: {currentUser.batch}</span>
               </div>
             )}
           </div>
@@ -69,8 +69,18 @@ export default function ProfilePage() {
                 <BookOpen size={20} />
               </div>
               <div className="space-y-1">
-                <span className="font-bold text-sm text-foreground block">Active Course Enrolled</span>
-                <span className="text-xs text-text-muted block">UI/UX Design, React Frontend & Node Backend Development tracks</span>
+                <span className="font-bold text-sm text-foreground block">
+                  {userRole === "learner" ? "Active Courses Enrolled" : "Managed Classes"}
+                </span>
+                <span className="text-xs text-text-muted block">
+                  {classes.length > 0
+                    ? classes
+                        .filter(c => !currentUser?.batch || c.batch === currentUser.batch || userRole !== "learner")
+                        .map(c => c.subject || c.name)
+                        .filter(Boolean)
+                        .join(", ") || "No classes assigned yet"
+                    : "Loading courses..."}
+                </span>
               </div>
             </div>
 

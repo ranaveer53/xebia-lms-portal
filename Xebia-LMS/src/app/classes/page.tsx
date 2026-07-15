@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { useApp } from "../../lib/context";
 import Filters from "../../components/filters/Filters";
 import { Calendar, Users, MapPin, Video } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function ClassesPage() {
+  const router = useRouter();
   const { currentUser, classes } = useApp();
   const [timeFilter, setTimeFilter] = useState("All");
   const [batchFilter, setBatchFilter] = useState("All Batches");
@@ -64,12 +66,12 @@ export default function ClassesPage() {
                 <div className="grid grid-cols-2 gap-4 border-t border-border/50 pt-4">
                   <div className="flex items-center gap-2 text-xs text-foreground font-semibold">
                     <Video size={16} className="text-accent" />
-                    <span>Virtual Room A</span>
+                    <span>{(cls as any).virtualRoomLink ? "Virtual Room" : "Virtual Room"}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-foreground font-semibold">
                     <Users size={16} className="text-primary" />
                     <span>
-                      {userRole === "teacher" || userRole === "admin" ? "28 Registered" : `Instructor: ${cls.teacherName}`}
+                      {userRole === "teacher" || userRole === "admin" ? `${(cls as any).studentCount || "—"} Registered` : `Instructor: ${cls.teacherName}`}
                     </span>
                   </div>
                 </div>
@@ -77,7 +79,21 @@ export default function ClassesPage() {
 
               <div className="border-t border-border/50 pt-4 mt-6 flex justify-between items-center">
                 <span className="text-xs font-bold text-text-muted uppercase tracking-wider">{cls.time}</span>
-                <button className="bg-primary hover:bg-primary-dark text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer shadow-xs">
+                <button
+                  onClick={() => {
+                    if (userRole === "teacher" || userRole === "admin") {
+                      router.push("/learners");
+                    } else {
+                      const link = (cls as any).virtualRoomLink;
+                      if (link) {
+                        window.open(link, "_blank");
+                      } else {
+                        alert("No virtual room link available for this class.");
+                      }
+                    }
+                  }}
+                  className="bg-primary hover:bg-primary-dark text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer shadow-xs"
+                >
                   {userRole === "teacher" || userRole === "admin" ? "Manage Students" : "Join Lecture"}
                 </button>
               </div>
