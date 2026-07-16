@@ -93,318 +93,288 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     @Override
+    @Override
     public void run(String... args) {
         try {
-            if (userRepository.count() == 0) {
-                System.out.println("[DataSeeder] MongoDB database is empty. Seeding database with initial data...");
-                createUploadDirAndDummyFiles();
-                seedUsers();
-                seedClasses();
-                seedBatches();
-                seedAssessments();
-                seedSubmissions();
-                seedMaterials();
-                System.out.println("[DataSeeder] Seeding complete.");
-            } else {
-                System.out.println("[DataSeeder] MongoDB already contains user data. Skipping re-seeding to prevent data loss.");
-                // Always ensure default batches exist even if DB was already seeded
-                ensureDefaultBatchesExist();
-            }
+            System.out.println("[DataSeeder] Clearing old collections to seed 50 datasets per API...");
+            userRepository.deleteAll();
+            batchRepository.deleteAll();
+            classInfoRepository.deleteAll();
+            assessmentRepository.deleteAll();
+            submissionRepository.deleteAll();
+            materialRepository.deleteAll();
+
+            createUploadDirAndDummyFiles();
+            seedUsers();
+            seedBatches();
+            seedClasses();
+            seedAssessments();
+            seedSubmissions();
+            seedMaterials();
+            System.out.println("[DataSeeder] Seeding 50 datasets completed successfully.");
         } catch (Exception e) {
-            System.err.println("[DataSeeder] WARNING: MongoDB is offline or connection timed out. MongoDB features will be unavailable: " + e.getMessage());
+            System.err.println("[DataSeeder] WARNING: MongoDB database seeding failed: " + e.getMessage());
         }
     }
 
     private void seedUsers() {
-        userRepository.save(new User(
-                "t-1", "Shan Ali", "teacher@lms.com", "teacher",
+        // Core users
+        userRepository.save(new User("t-1", "Shan Ali", "teacher@lms.com", "teacher",
                 "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
                 "teacher123", "", ""));
-        userRepository.save(new User(
-                "l-1", "Flores Juanita", "learner@lms.com", "learner",
+        userRepository.save(new User("l-1", "Flores Juanita", "learner@lms.com", "learner",
                 "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
                 "learner123", "Batch A", "XEB001"));
-        userRepository.save(new User(
-                "l-2", "John Doe", "john@lms.com", "learner",
+        userRepository.save(new User("l-2", "John Doe", "john@lms.com", "learner",
                 "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
                 "learner123", "Batch C", "XEB002"));
-        // Seeding additional unified users
-        userRepository.save(new User(
-                "u-admin", "Enterprise Admin", "admin@xebia.com", "admin",
+        userRepository.save(new User("u-admin", "Enterprise Admin", "admin@xebia.com", "admin",
                 "", "admin123", "", ""));
-        userRepository.save(new User(
-                "u-learner", "Xebia Consultant", "learner@xebia.com", "learner",
+        userRepository.save(new User("u-learner", "Xebia Consultant", "learner@xebia.com", "learner",
                 "", "learner123", "Batch B", "XEB003"));
+
+        String[] firstNames = {"Sarah", "Alex", "Emily", "David", "Jessica", "Michael", "Emma", "Daniel", "Olivia", "James", "Sophia", "Matthew", "Isabella", "Andrew", "Charlotte", "Joshua", "Amelia", "Christopher", "Mia", "Joseph", "Harper", "William", "Evelyn", "Abigail", "Ryan", "Emily", "Nathan", "Elizabeth", "Christian", "Sofia", "Justin", "Avery", "Jonathan", "Ella", "Robert", "Madison", "Brian", "Scarlett", "Kevin", "Grace", "Thomas", "Chloe", "Charles"};
+        String[] lastNames = {"Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Hill", "Ramirez"};
+
+        for (int i = 6; i <= 50; i++) {
+            String fName = firstNames[(i - 1) % firstNames.length];
+            String lName = lastNames[(i - 1) % lastNames.length];
+            String name = fName + " " + lName;
+            String email = fName.toLowerCase() + "." + lName.toLowerCase() + i + "@xebia.com";
+            String role = (i <= 8) ? "teacher" : "learner";
+            String batch = role.equals("learner") ? "Batch " + (char) ('A' + (i % 4)) : "";
+            String rollNumber = role.equals("learner") ? "XEB" + String.format("%03d", i) : "";
+            userRepository.save(new User("u-" + i, name, email, role, "", "learner123", batch, rollNumber));
+        }
     }
 
     private void seedBatches() {
         String now = java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_DATE_TIME);
-        String[][] batches = {
-            {"b-1", "Batch A", "UI/UX Design", "Design Principles"},
-            {"b-2", "Batch B", "Front-end Development", "React & Next.js"},
-            {"b-3", "Batch C", "Back-end Development", "Node.js & Express"},
-            {"b-4", "Batch D", "Project Management", "Agile & Scrum"}
-        };
-        for (String[] b : batches) {
-            if (!batchRepository.findById(b[0]).isPresent()) {
-                Batch batch = new Batch();
-                batch.setId(b[0]);
-                batch.setBatchName(b[1]);
-                batch.setCourse(b[2]);
-                batch.setSubject(b[3]);
-                batch.setCreatedAt(now);
-                batch.setUpdatedAt(now);
-                batchRepository.save(batch);
-            }
-        }
-    }
+        String[] courses = {"UI/UX Design", "Front-end Development", "Back-end Development", "Project Management", "Cloud DevOps Engineering", "Data Science & AI", "Cyber Security", "Mobile App Development"};
+        String[] subjects = {"Design Principles", "React & Next.js", "Node.js & Express", "Agile & Scrum", "AWS & Docker", "Python & TensorFlow", "Security Auditing", "React Native"};
 
-    private void ensureDefaultBatchesExist() {
-        // If the batches collection is empty, seed default batches
-        // This handles cases where existing DBs were seeded before batch support was added
-        try {
-            if (batchRepository.count() == 0) {
-                System.out.println("[DataSeeder] Batches collection is empty. Seeding default batches...");
-                seedBatches();
-            }
-        } catch (Exception e) {
-            System.err.println("[DataSeeder] Could not check/seed batches: " + e.getMessage());
+        for (int i = 1; i <= 50; i++) {
+            String course = courses[i % courses.length];
+            String subject = subjects[i % subjects.length];
+            char batchChar = (char) ('A' + ((i - 1) % 26));
+            int batchNum = ((i - 1) / 26) + 1;
+            String batchName = "Batch " + batchChar + (batchNum > 1 ? " " + batchNum : "");
+
+            Batch batch = new Batch();
+            batch.setId("b-" + i);
+            batch.setBatchName(batchName);
+            batch.setCourse(course);
+            batch.setSubject(subject);
+            batch.setCreatedAt(now);
+            batch.setUpdatedAt(now);
+            batchRepository.save(batch);
         }
     }
 
     private void seedClasses() {
-        classInfoRepository.save(new ClassInfo("c-1", "UI/UX Design", "Batch A", "Design Principles",
-                "09:30 AM - 11:00 AM", "Shan Ali", null));
-        classInfoRepository.save(new ClassInfo("c-2", "Front-end Development", "Batch B", "React & Next.js",
-                "10:15 AM - 11:45 AM", "Shan Ali", null));
-        classInfoRepository.save(new ClassInfo("c-3", "Back-end Development", "Batch C", "Node.js & Express",
-                "11:00 AM - 12:30 PM", "Shan Ali", null));
-        classInfoRepository.save(new ClassInfo("c-4", "Project Management", "Batch D", "Agile & Scrum",
-                "12:00 PM - 01:30 PM", "Shan Ali", null));
+        String[] courses = {"UI/UX Design", "Front-end Development", "Back-end Development", "Project Management", "Cloud DevOps Engineering", "Data Science & AI", "Cyber Security", "Mobile App Development"};
+        String[] subjects = {"Design Principles", "React & Next.js", "Node.js & Express", "Agile & Scrum", "AWS & Docker", "Python & TensorFlow", "Security Auditing", "React Native"};
+        String[] times = {"09:30 AM - 11:00 AM", "10:15 AM - 11:45 AM", "11:00 AM - 12:30 PM", "12:00 PM - 01:30 PM", "02:00 PM - 03:30 PM", "03:30 PM - 05:00 PM"};
+        String[] rooms = {"Room 101", "Room 102", "Room 203", "Room 204", "Virtual Hub A", "Virtual Hub B"};
+
+        for (int i = 1; i <= 50; i++) {
+            String course = courses[i % courses.length];
+            String subject = subjects[i % subjects.length];
+            char batchChar = (char) ('A' + ((i - 1) % 4));
+            String batchName = "Batch " + batchChar;
+            String time = times[i % times.length];
+            String room = rooms[i % rooms.length];
+
+            classInfoRepository.save(new ClassInfo("c-" + i, course, batchName, subject, time, "Shan Ali", room));
+        }
     }
 
     private void seedAssessments() {
         Instant now = Instant.now();
+        String[] courses = {"UI/UX Design", "Front-end Development", "Back-end Development", "Project Management", "Cloud DevOps Engineering", "Data Science & AI", "Cyber Security", "Mobile App Development"};
+        String[] subjects = {"Design Principles", "React & Next.js", "Node.js & Express", "Agile & Scrum", "AWS & Docker", "Python & TensorFlow", "Security Auditing", "React Native"};
+        String[] quizTitles = {"Core Principles Quiz", "Advanced Components Assessment", "Database Architecture Exam", "Agile Practices Review", "Infrastructure Deployment Test", "Statistical Models Evaluation", "Threat Vector Identification", "State Management Deep Dive"};
 
-        // Assessment 1: MCQ quiz (published)
-        Assessment a1 = new Assessment();
-        a1.setId("a-1");
-        a1.setTitle("UI/UX Design Principles Quiz");
-        a1.setSubject("UI/UX Design");
-        a1.setBatch("Batch A");
-        a1.setBatches(Arrays.asList("Batch A", "Batch B"));
-        a1.setInstructions("Answer all questions. You have 30 minutes. Once submitted, answers cannot be edited.");
-        a1.setQuestionType("mcq");
-        a1.setTotalMarks(30);
-        a1.setDeadline(now.plus(2, ChronoUnit.DAYS).toString().substring(0, 16));
-        a1.setStatus("published");
-        a1.setCreatedAt(now.minus(5, ChronoUnit.DAYS).toString());
+        for (int i = 1; i <= 50; i++) {
+            String title = subjects[i % subjects.length] + " - " + quizTitles[i % quizTitles.length];
+            String subject = courses[i % courses.length];
+            char batchChar = (char) ('A' + ((i - 1) % 4));
+            String batchName = "Batch " + batchChar;
+            String questionType = (i % 2 == 0) ? "mcq" : "written";
+            int totalMarks = questionType.equals("mcq") ? 30 : 50;
+            String status = (i <= 40) ? "published" : "draft";
+            String deadline = now.plus((i % 7) - 3, ChronoUnit.DAYS).toString().substring(0, 16);
 
-        List<Question> q1List = new ArrayList<>();
+            Assessment a = new Assessment();
+            a.setId("a-" + i);
+            a.setTitle(title);
+            a.setSubject(subject);
+            a.setBatch(batchName);
+            a.setBatches(Arrays.asList(batchName));
+            a.setInstructions("Please complete all parts carefully. Late submissions will face penalties.");
+            a.setQuestionType(questionType);
+            a.setTotalMarks(totalMarks);
+            a.setDeadline(deadline);
+            a.setStatus(status);
+            a.setCreatedAt(now.minus(10, ChronoUnit.DAYS).toString());
 
-        Question q11 = new Question();
-        q11.setId("q-1-1");
-        q11.setText("What does UX stand for?");
-        q11.setType("mcq");
-        q11.setOptions(Arrays.asList("User Experience", "User eXchange", "Unique eXperience", "Universal eXperience"));
-        q11.setCorrectAnswer("User Experience");
-        q11.setMarks(10);
-        q11.setAssessment(a1);
-        q1List.add(q11);
+            List<Question> qList = new ArrayList<>();
+            if (questionType.equals("mcq")) {
+                Question q1 = new Question();
+                q1.setId("q-" + i + "-1");
+                q1.setText("Identify the main advantage of using " + subjects[i % subjects.length] + " patterns.");
+                q1.setType("mcq");
+                q1.setOptions(Arrays.asList("Improved Performance", "Reduced Maintenance", "Enhanced Security", "All of the above"));
+                q1.setCorrectAnswer("All of the above");
+                q1.setMarks(10);
+                q1.setAssessment(a);
+                qList.add(q1);
 
-        Question q12 = new Question();
-        q12.setId("q-1-2");
-        q12.setText("Which of the following is NOT a principle of design?");
-        q12.setType("mcq");
-        q12.setOptions(Arrays.asList("Contrast", "Balance", "Haphazard", "Alignment"));
-        q12.setCorrectAnswer("Haphazard");
-        q12.setMarks(10);
-        q12.setAssessment(a1);
-        q1List.add(q12);
+                Question q2 = new Question();
+                q2.setId("q-" + i + "-2");
+                q2.setText("Which standard describes the baseline specification for this module?");
+                q2.setType("mcq");
+                q2.setOptions(Arrays.asList("RFC-2119", "ISO-27001", "IEEE-829", "W3C Recommendation"));
+                q2.setCorrectAnswer("RFC-2119");
+                q2.setMarks(10);
+                q2.setAssessment(a);
+                qList.add(q2);
 
-        Question q13 = new Question();
-        q13.setId("q-1-3");
-        q13.setText("What is the primary focus of wireframing?");
-        q13.setType("mcq");
-        q13.setOptions(Arrays.asList("Color and typography", "Layout and structure", "Final animations", "Database connections"));
-        q13.setCorrectAnswer("Layout and structure");
-        q13.setMarks(10);
-        q13.setAssessment(a1);
-        q1List.add(q13);
+                Question q3 = new Question();
+                q3.setId("q-" + i + "-3");
+                q3.setText("What is the default configuration parameter for initialization?");
+                q3.setType("mcq");
+                q3.setOptions(Arrays.asList("production=true", "mode=debug", "env=development", "autoConfigure=false"));
+                q3.setCorrectAnswer("mode=debug");
+                q3.setMarks(10);
+                q3.setAssessment(a);
+                qList.add(q3);
+            } else {
+                Question q1 = new Question();
+                q1.setId("q-" + i + "-1");
+                q1.setText("Provide a detailed critique on the scalability of " + subjects[i % subjects.length] + ".");
+                q1.setType("written");
+                q1.setOptions(new ArrayList<>());
+                q1.setMarks(25);
+                q1.setAssessment(a);
+                qList.add(q1);
 
-        a1.setQuestions(q1List);
-        assessmentRepository.save(a1);
+                Question q2 = new Question();
+                q2.setId("q-" + i + "-2");
+                q2.setText("Explain a real-world scenario where the default configurations fail.");
+                q2.setType("written");
+                q2.setOptions(new ArrayList<>());
+                q2.setMarks(25);
+                q2.setAssessment(a);
+                qList.add(q2);
+            }
+            a.setQuestions(qList);
 
-        // Assessment 2: Written (published)
-        Assessment a2 = new Assessment();
-        a2.setId("a-2");
-        a2.setTitle("React Components & State Written Assessment");
-        a2.setSubject("Front-end Development");
-        a2.setBatch("Batch B");
-        a2.setBatches(Arrays.asList("Batch B", "Batch C"));
-        a2.setInstructions("Write descriptive answers. Max 250 words per question. Marks depend on clarity and correctness.");
-        a2.setQuestionType("written");
-        a2.setTotalMarks(20);
-        a2.setDeadline(now.plus(5, ChronoUnit.DAYS).toString().substring(0, 16));
-        a2.setStatus("published");
-        a2.setCreatedAt(now.minus(3, ChronoUnit.DAYS).toString());
-
-        List<Question> q2List = new ArrayList<>();
-
-        Question q21 = new Question();
-        q21.setId("q-2-1");
-        q21.setText("Explain the difference between Props and State in React.");
-        q21.setType("written");
-        q21.setOptions(new ArrayList<String>());
-        q21.setMarks(10);
-        q21.setAssessment(a2);
-        q2List.add(q21);
-
-        Question q22 = new Question();
-        q22.setId("q-2-2");
-        q22.setText("Describe the lifecycle of a React functional component using the useEffect hook.");
-        q22.setType("written");
-        q22.setOptions(new ArrayList<String>());
-        q22.setMarks(10);
-        q22.setAssessment(a2);
-        q2List.add(q22);
-
-        a2.setQuestions(q2List);
-        assessmentRepository.save(a2);
-
-        // Assessment 3: File-based (published, past deadline)
-        Assessment a3 = new Assessment();
-        a3.setId("a-3");
-        a3.setTitle("SQL Queries and Normalization Quiz (Uploaded File)");
-        a3.setSubject("Back-end Development");
-        a3.setBatch("Batch C");
-        a3.setBatches(Arrays.asList("Batch C"));
-        a3.setInstructions("Please download the attached PDF, solve the questions on paper, scan, and upload your answers.");
-        a3.setQuestionType("written");
-        a3.setTotalMarks(50);
-        a3.setDeadline(now.minus(1, ChronoUnit.DAYS).toString().substring(0, 16));
-        a3.setStatus("published");
-        a3.setCreatedAt(now.minus(10, ChronoUnit.DAYS).toString());
-        a3.setFileName("sql_queries_assignment_v2.pdf");
-        a3.setFileSize("1.2 MB");
-        a3.setFileUrl("/api/files/preview/sql_queries_assignment_v2.pdf");
-        a3.setFile(new AssessmentFile(
-                "sql_queries_assignment_v2.pdf",
-                "sql_queries_assignment_v2.pdf",
-                "/api/files/preview/sql_queries_assignment_v2.pdf",
-                "application/pdf",
-                1258291L,
-                now.minus(10, ChronoUnit.DAYS).toString()
-        ));
-        a3.setQuestions(new ArrayList<Question>());
-        assessmentRepository.save(a3);
-
-        // Assessment 4: Draft
-        Assessment a4 = new Assessment();
-        a4.setId("a-4");
-        a4.setTitle("Scrum & Sprint Planning Framework Draft");
-        a4.setSubject("Project Management");
-        a4.setBatch("Batch D");
-        a4.setBatches(Arrays.asList("Batch D"));
-        a4.setInstructions("Draft assessment on Agile frameworks.");
-        a4.setQuestionType("mcq");
-        a4.setTotalMarks(10);
-        a4.setDeadline(now.plus(10, ChronoUnit.DAYS).toString().substring(0, 16));
-        a4.setStatus("draft");
-        a4.setCreatedAt(now.toString());
-
-        List<Question> q4List = new ArrayList<>();
-
-        Question q41 = new Question();
-        q41.setId("q-4-1");
-        q41.setText("How long is a typical Sprint?");
-        q41.setType("mcq");
-        q41.setOptions(Arrays.asList("1-4 weeks", "6 months", "1 day", "1 year"));
-        q41.setCorrectAnswer("1-4 weeks");
-        q41.setMarks(10);
-        q41.setAssessment(a4);
-        q4List.add(q41);
-
-        a4.setQuestions(q4List);
-        assessmentRepository.save(a4);
+            if (i % 5 == 0) {
+                a.setFileName("document_guide_" + i + ".pdf");
+                a.setFileSize("1.5 MB");
+                a.setFileUrl("/api/files/preview/document_guide_" + i + ".pdf");
+                a.setFile(new AssessmentFile(
+                        "document_guide_" + i + ".pdf",
+                        "document_guide_" + i + ".pdf",
+                        "/api/files/preview/document_guide_" + i + ".pdf",
+                        "application/pdf",
+                        1572864L,
+                        now.minus(10, ChronoUnit.DAYS).toString()
+                ));
+            }
+            assessmentRepository.save(a);
+        }
     }
 
     private void seedSubmissions() {
         Instant now = Instant.now();
+        String[] statuses = {"marked", "submitted", "Auto Graded"};
+        String[] firstNames = {"Sarah", "Alex", "Emily", "David", "Jessica", "Michael", "Emma", "Daniel", "Olivia", "James", "Sophia", "Matthew", "Isabella", "Andrew", "Charlotte", "Joshua", "Amelia", "Christopher", "Mia", "Joseph", "Harper", "William", "Evelyn", "Abigail", "Ryan", "Emily", "Nathan", "Elizabeth", "Christian", "Sofia", "Justin", "Avery", "Jonathan", "Ella", "Robert", "Madison", "Brian", "Scarlett", "Kevin", "Grace", "Thomas", "Chloe", "Charles"};
+        String[] lastNames = {"Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson", "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White", "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall", "Young", "Allen", "Sanchez", "Wright", "King", "Scott", "Green", "Baker", "Adams", "Nelson", "Hill", "Ramirez"};
 
-        // Submission 1: Marked
-        Submission s1 = new Submission();
-        s1.setId("s-1");
-        s1.setAssessmentId("a-1");
-        s1.setAssessmentTitle("UI/UX Design Principles Quiz");
-        s1.setSubject("UI/UX Design");
-        s1.setBatch("Batch A");
-        s1.setLearnerId("l-1");
-        s1.setLearnerName("Flores Juanita");
-        s1.setRollNumber("XEB001");
-        s1.setDeadline(now.plus(2, ChronoUnit.DAYS).toString().substring(0, 16));
-        Map<String, String> answers1 = new HashMap<>();
-        answers1.put("q-1-1", "User Experience");
-        answers1.put("q-1-2", "Haphazard");
-        answers1.put("q-1-3", "Layout and structure");
-        s1.setAnswers(answers1);
-        s1.setStatus("marked");
-        s1.setMarksObtained(30);
-        s1.setTotalMarks(30);
-        s1.setFeedback("Excellent work! Perfect answers for all questions.");
-        s1.setSubmittedAt(now.minus(4, ChronoUnit.DAYS).toString());
-        submissionRepository.save(s1);
+        for (int i = 1; i <= 50; i++) {
+            Optional<Assessment> aOpt = assessmentRepository.findById("a-" + i);
+            if (!aOpt.isPresent()) continue;
+            Assessment a = aOpt.get();
 
-        // Submission 2: Submitted (pending grading)
-        Submission s2 = new Submission();
-        s2.setId("s-2");
-        s2.setAssessmentId("a-2");
-        s2.setAssessmentTitle("React Components & State Written Assessment");
-        s2.setSubject("Front-end Development");
-        s2.setBatch("Batch B");
-        s2.setLearnerId("l-1");
-        s2.setLearnerName("Flores Juanita");
-        s2.setRollNumber("XEB001");
-        s2.setDeadline(now.plus(5, ChronoUnit.DAYS).toString().substring(0, 16));
-        Map<String, String> answers2 = new HashMap<>();
-        answers2.put("q-2-1", "Props are inputs passed into a component from its parent, making them immutable from within the component. State represents local mutable data that is managed within the component itself, which triggers re-renders when updated.");
-        answers2.put("q-2-2", "Functional components use the useEffect hook to perform side effects. If no dependency array is provided, it runs on every render. If an empty array [] is passed, it runs once on mount. Cleanups can be returned to execute on unmount.");
-        s2.setAnswers(answers2);
-        s2.setStatus("submitted");
-        s2.setTotalMarks(20);
-        s2.setSubmittedAt(now.minus(2, ChronoUnit.DAYS).toString());
-        submissionRepository.save(s2);
+            int userIndex = 6 + (i % 44);
+            String fName = firstNames[(userIndex - 1) % firstNames.length];
+            String lName = lastNames[(userIndex - 1) % lastNames.length];
+            String learnerName = fName + " " + lName;
+            String learnerId = "u-" + userIndex;
+            String rollNumber = "XEB" + String.format("%03d", userIndex);
+            String learnerBatch = "Batch " + (char) ('A' + (userIndex % 4));
 
-        // Submission 3: File submission
-        Submission s3 = new Submission();
-        s3.setId("s-3");
-        s3.setAssessmentId("a-3");
-        s3.setAssessmentTitle("SQL Queries and Normalization Quiz (Uploaded File)");
-        s3.setSubject("Back-end Development");
-        s3.setBatch("Batch C");
-        s3.setLearnerId("l-2");
-        s3.setLearnerName("John Doe");
-        s3.setRollNumber("XEB002");
-        s3.setDeadline(now.minus(1, ChronoUnit.DAYS).toString().substring(0, 16));
-        s3.setAnswers(new HashMap<String, String>());
-        s3.setStatus("submitted");
-        s3.setTotalMarks(50);
-        s3.setSubmittedAt(now.minus(36, ChronoUnit.HOURS).toString());
-        s3.setSubmittedFileUrl("/api/files/preview/john_doe_sql_submission.pdf");
-        s3.setSubmittedFileName("john_doe_sql_submission.pdf");
-        submissionRepository.save(s3);
+            String status = statuses[i % statuses.length];
+            int totalMarks = a.getTotalMarks();
+            Integer marksObtained = status.equals("submitted") ? null : (int) (totalMarks * (0.7 + (i % 4) * 0.1));
+
+            Submission s = new Submission();
+            s.setId("s-" + i);
+            s.setAssessmentId(a.getId());
+            s.setAssessmentTitle(a.getTitle());
+            s.setSubject(a.getSubject());
+            s.setBatch(learnerBatch);
+            s.setLearnerId(learnerId);
+            s.setLearnerName(learnerName);
+            s.setRollNumber(rollNumber);
+            s.setDeadline(a.getDeadline());
+
+            Map<String, String> answers = new HashMap<>();
+            for (Question q : a.getQuestions()) {
+                if (q.getType().equals("mcq")) {
+                    answers.put(q.getId(), q.getCorrectAnswer());
+                } else {
+                    answers.put(q.getId(), "This is a detailed and well-thought-out written response answering the query comprehensively.");
+                }
+            }
+            s.setAnswers(answers);
+            s.setStatus(status);
+            s.setTotalMarks(totalMarks);
+            s.setSubmittedAt(now.minus(i * 3L, ChronoUnit.HOURS).toString());
+
+            if (marksObtained != null) {
+                s.setMarksObtained(marksObtained);
+                s.setPercentage((double) marksObtained / totalMarks * 100.0);
+                s.setFeedback("Good submission, well answered and clearly explained.");
+            }
+
+            if (i % 4 == 0) {
+                s.setSubmittedFileName("student_answer_sheet_" + i + ".pdf");
+                s.setSubmittedFileUrl("/api/files/preview/student_answer_sheet_" + i + ".pdf");
+            }
+
+            submissionRepository.save(s);
+        }
     }
 
     private void seedMaterials() {
         Instant now = Instant.now();
+        String[] courses = {"UI/UX Design", "Front-end Development", "Back-end Development", "Project Management", "Cloud DevOps Engineering", "Data Science & AI", "Cyber Security", "Mobile App Development"};
+        String[] subjects = {"Design Principles", "React & Next.js", "Node.js & Express", "Agile & Scrum", "AWS & Docker", "Python & TensorFlow", "Security Auditing", "React Native"};
+        String[] suffixes = {"Guide Booklet", "Cheat Sheet Deck", "Syllabus Handout", "Reference Material Documentation"};
+        String[] files = {"slide_deck_v1.pdf", "practical_cheatsheet.pdf", "syllabus_latest.pdf", "module_workbook.pdf"};
 
-        materialRepository.save(new Material("m-1", "Typography and Color Theory Guide", "UI/UX Design", "Batch A",
-                "typography_and_color_theory_v1.pdf", "4.5 MB",
-                "/api/files/preview/typography_and_color_theory_v1.pdf", "Shan Ali",
-                now.minus(12, ChronoUnit.DAYS).toString()));
-        materialRepository.save(new Material("m-2", "Next.js 15 App Router Reference Cheatsheet", "Front-end Development", "Batch B",
-                "nextjs15_cheatsheet.pdf", "850 KB",
-                "/api/files/preview/nextjs15_cheatsheet.pdf", "Shan Ali",
-                now.minus(8, ChronoUnit.DAYS).toString()));
+        for (int i = 1; i <= 50; i++) {
+            String course = courses[i % courses.length];
+            String subject = subjects[i % subjects.length];
+            String title = subject + " " + suffixes[i % suffixes.length];
+            char batchChar = (char) ('A' + ((i - 1) % 4));
+            String batchName = "Batch " + batchChar;
+            String fileName = subject.toLowerCase().replace(" ", "_") + "_" + files[i % files.length];
+
+            materialRepository.save(new Material(
+                    "m-" + i,
+                    title,
+                    course,
+                    batchName,
+                    fileName,
+                    (1 + (i % 8)) + "." + (i % 9) + " MB",
+                    "/api/files/preview/" + fileName,
+                    "Shan Ali",
+                    now.minus(i * 18L, ChronoUnit.HOURS).toString()
+            ));
+        }
     }
 }
