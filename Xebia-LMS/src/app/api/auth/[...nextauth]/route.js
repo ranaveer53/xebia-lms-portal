@@ -26,7 +26,10 @@ loadEnvLocal();
 
 const nextAuthSecret = process.env.NEXTAUTH_SECRET || "dev-secret";
 const nextAuthUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
-const nextAuthApiUrl = process.env.NEXTAUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+let nextAuthApiUrl = process.env.NEXTAUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+if (!nextAuthApiUrl.endsWith("/api") && !nextAuthApiUrl.endsWith("/api/")) {
+  nextAuthApiUrl = `${nextAuthApiUrl.replace(/\/$/, "")}/api`;
+}
 process.env.NEXTAUTH_SECRET = nextAuthSecret;
 process.env.NEXTAUTH_URL = nextAuthUrl;
 process.env.NEXTAUTH_API_URL = nextAuthApiUrl;
@@ -50,7 +53,10 @@ const authOptions = {
 
         const email = credentials.email?.trim()?.toLowerCase();
         const password = credentials.password?.trim();
-        const apiBaseUrl = process.env.NEXTAUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+        let apiBaseUrl = process.env.NEXTAUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+        if (!apiBaseUrl.endsWith("/api") && !apiBaseUrl.endsWith("/api/")) {
+          apiBaseUrl = `${apiBaseUrl.replace(/\/$/, "")}/api`;
+        }
         const loginUrl = `${apiBaseUrl.replace(/\/$/, "")}/auth/login`;
 
         try {
