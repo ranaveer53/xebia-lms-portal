@@ -11,7 +11,10 @@ import {
   saveDbData
 } from "./dbClient";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+let API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+if (!API_BASE_URL.endsWith("/api") && !API_BASE_URL.endsWith("/api/")) {
+  API_BASE_URL = `${API_BASE_URL.replace(/\/$/, "")}/api`;
+}
 const USE_MOCK_API = process.env.NEXT_PUBLIC_USE_MOCK_API === "true";
 
 let isBackendOffline = USE_MOCK_API;
