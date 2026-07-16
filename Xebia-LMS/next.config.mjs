@@ -11,8 +11,8 @@ const nextConfig = {
     
     const rewrites = [];
     for (const ep of endpoints) {
-      rewrites.push({ source: `/api/${ep}`, destination: `${backendUrl}/${ep}` });
-      rewrites.push({ source: `/api/${ep}/:path*`, destination: `${backendUrl}/${ep}/:path*` });
+      rewrites.push({ source: `/api/${ep}`, destination: `${backendUrl}/api/${ep}` });
+      rewrites.push({ source: `/api/${ep}/:path*`, destination: `${backendUrl}/api/${ep}/:path*` });
     }
     
     return rewrites;

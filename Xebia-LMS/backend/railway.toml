@@ -1,5 +1,5 @@
 [deploy]
-healthcheckPath = "/actuator/health"
+healthcheckPath = "/api/actuator/health"
 healthcheckTimeout = 300
 startDetectionTimeout = 300
 restartPolicyType = "ON_FAILURE"
