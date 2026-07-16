@@ -175,7 +175,10 @@ export default function AssessmentsPage() {
 
   const getLearnerStatus = (assessmentId: string) => {
     const sub = submissions.find((s) => s.assessmentId === assessmentId && s.learnerId === userId);
-    if (!sub) return { label: "Not Started", color: "bg-zinc-50 text-zinc-500 border-zinc-200", code: "pending", data: null };
+    // Virtual/phantom "pending" or "missing" entries from the backend mean the learner has NOT submitted
+    if (!sub || sub.status === "pending" || sub.status === "missing") {
+      return { label: "Not Started", color: "bg-zinc-50 text-zinc-500 border-zinc-200", code: "pending", data: null };
+    }
     if (sub.status === "marked") return { label: "Marked", color: "bg-emerald-50 text-emerald-700 border-emerald-100", code: "marked", data: sub };
     if (sub.status === "Auto Graded") return { label: "Auto Graded", color: "bg-purple-50 text-[#84117C] border-[#84117C]/20", code: "marked", data: sub };
     return { label: "Submitted", color: "bg-primary/5 text-primary border-primary/10", code: "submitted", data: sub };

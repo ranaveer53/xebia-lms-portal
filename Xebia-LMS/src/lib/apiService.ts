@@ -125,6 +125,7 @@ export const apiService = {
   getSubmissions: async (filters?: {
     assessmentId?: string;
     batches?: string[];
+    learnerId?: string;
     status?: string;
     search?: string;
     timeFilter?: string;
@@ -138,6 +139,7 @@ export const apiService = {
       if (filters.batches && filters.batches.length > 0) {
         filters.batches.forEach(b => params.append("batches", b));
       }
+      if (filters.learnerId) params.set("learnerId", filters.learnerId);
       if (filters.status) params.set("status", filters.status);
       if (filters.search) params.set("search", filters.search);
       if (filters.timeFilter) params.set("timeFilter", filters.timeFilter);

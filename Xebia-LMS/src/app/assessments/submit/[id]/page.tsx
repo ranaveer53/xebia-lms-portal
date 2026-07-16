@@ -72,7 +72,13 @@ export default function SubmitAssessmentPage() {
     }
   }, [assessmentId, assessments]);
 
-  const existingSub = submissions.find((s) => s.assessmentId === assessmentId && s.learnerId === userId);
+  // Only count as existing submission if actually submitted (not virtual pending/missing entries from backend)
+  const existingSub = submissions.find((s) => 
+    s.assessmentId === assessmentId && 
+    s.learnerId === userId &&
+    s.status !== "pending" &&
+    s.status !== "missing"
+  );
 
   useEffect(() => {
     if (existingSub && assessment && (existingSub.status === "marked" || existingSub.status === "Auto Graded")) {

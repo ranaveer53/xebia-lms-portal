@@ -76,12 +76,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           ? currentUser.batch.trim()
           : undefined;
 
+        // For learners: fetch only THEIR OWN submissions by learnerId to avoid seeing
+        // other learners' virtual "pending" entries that would falsely show as submitted.
+        // For admin/teacher: fetch all submissions without learner filter.
+        const submissionFilter = currentUser.role === "learner" && currentUser.id
+          ? { learnerId: currentUser.id }
+          : undefined;
+
         const results = await Promise.allSettled([
           apiService.getClasses(),
           // Always fetch all assessments - no role/batch filter sent to backend.
           // Client-side filter in assessments/page.tsx handles visibility per role.
           apiService.getAssessments(),
-          apiService.getSubmissions(userBatch ? { batches: [userBatch] } : undefined),
+          apiService.getSubmissions(submissionFilter),
           apiService.getMaterials(userBatch),
         ]);
 

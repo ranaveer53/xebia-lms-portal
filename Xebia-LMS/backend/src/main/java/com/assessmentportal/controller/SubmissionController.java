@@ -41,6 +41,7 @@ public class SubmissionController {
     public List<Submission> getAll(
             @RequestParam(required = false) String assessmentId,
             @RequestParam(required = false) List<String> batches,
+            @RequestParam(required = false) String learnerId,
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) String timeFilter,
@@ -141,6 +142,10 @@ public class SubmissionController {
                 continue;
             }
             if (batches != null && !batches.isEmpty() && !batches.contains(s.getBatch())) {
+                continue;
+            }
+            // Filter by specific learnerId (used when learner fetches only their own submissions)
+            if (learnerId != null && !learnerId.isEmpty() && !learnerId.equals(s.getLearnerId())) {
                 continue;
             }
             if (status != null && !status.isEmpty() && !status.equalsIgnoreCase("All")) {
