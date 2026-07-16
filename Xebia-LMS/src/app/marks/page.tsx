@@ -2,11 +2,14 @@
 
 import React, { useState } from "react";
 import { useApp } from "../../lib/context";
+import { useRouter } from "next/navigation";
+import { apiService } from "../../lib/apiService";
 import Filters from "../../components/filters/Filters";
-import { FileCheck, Sparkles, TrendingUp, Search } from "lucide-react";
+import { FileCheck, Sparkles, TrendingUp, Search, Award } from "lucide-react";
 
 export default function MarksPage() {
   const { currentUser, submissions } = useApp();
+  const router = useRouter();
   const [timeFilter, setTimeFilter] = useState("All");
   const [batchFilter, setBatchFilter] = useState("All Batches");
   const [search, setSearch] = useState("");
@@ -14,10 +17,10 @@ export default function MarksPage() {
   const userRole = currentUser?.role || "learner";
   const userId = currentUser?.id || "";
 
-  // Filter graded submissions
+  // Filter graded submissions (both manually marked and auto-graded)
   const gradedList = submissions.filter((s) => {
-    if (s.status !== "marked") return false;
-    if (search && !s.learnerName.toLowerCase().includes(search.toLowerCase()) && !s.assessmentTitle.toLowerCase().includes(search.toLowerCase())) return false;
+    if (s.status !== "marked" && s.status !== "Auto Graded") return false;
+    if (search && !s.learnerName?.toLowerCase().includes(search.toLowerCase()) && !s.assessmentTitle?.toLowerCase().includes(search.toLowerCase())) return false;
     
     if (userRole === "learner") {
       if (s.learnerId !== userId) return false;
@@ -136,11 +139,35 @@ export default function MarksPage() {
               <div className="border-t border-border/50 pt-4 mt-6 flex justify-between items-center text-xs font-bold text-text-muted">
                 <div className="flex items-center gap-1.5">
                   <FileCheck size={14} className="text-emerald-500" />
-                  <span>Evaluated successfully</span>
+                  <span>{grade.status === "Auto Graded" ? "Auto-graded" : "Evaluated successfully"}</span>
                 </div>
-                <span className="text-[11px] font-medium">
-                  {new Date(grade.submittedAt).toLocaleDateString()}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-medium">
+                    {new Date(grade.submittedAt).toLocaleDateString()}
+                  </span>
+                  {/* Certificate button for learners who scored ≥90% */}
+                  {userRole === "learner" && (() => {
+                    const pct = grade.percentage !== undefined ? grade.percentage : ((grade.marksObtained || 0) / grade.totalMarks) * 100;
+                    if (pct >= 90) {
+                      return (
+                        <button
+                          onClick={async () => {
+                            try {
+                              const cert = await apiService.generateCertificate(userId, grade.assessmentId);
+                              router.push(`/certificates/${cert.id}`);
+                            } catch (err) {
+                              console.error("Error loading certificate:", err);
+                            }
+                          }}
+                          className="bg-[#84117C] hover:bg-[#6c0e66] text-white font-bold text-[10px] px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer transition-all shadow-xs"
+                        >
+                          <Award size={11} /> Certificate
+                        </button>
+                      );
+                    }
+                    return null;
+                  })()}
+                </div>
               </div>
             </div>
           ))
