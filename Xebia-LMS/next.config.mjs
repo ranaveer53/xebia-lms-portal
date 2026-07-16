@@ -5,7 +5,7 @@ const nextConfig = {
     const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
     const endpoints = [
       "classes", "assessments", "submissions", "materials", "certificates", 
-      "batches", "upload", "dashboard", "courses", "categories", "modules", 
+      "batches", "upload", "uploads", "dashboard", "courses", "categories", "modules", 
       "submodules", "contents", "content", "iam", "analytics", "files", "events"
     ];
     
