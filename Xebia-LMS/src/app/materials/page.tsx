@@ -28,8 +28,11 @@ export default function MaterialsPage() {
   useEffect(() => {
     apiService.getBatches().then((data) => {
       if (data && data.length > 0) {
-        setBatches(data.map((b: any) => b.batchName || b.name || b));
-        setMaterialBatch(data[0].batchName || data[0].name || data[0]);
+        const names: string[] = data.map((b: { batchName: string }) => b.batchName).filter(Boolean);
+        if (names.length > 0) {
+          setBatches(names);
+          setMaterialBatch(names[0]);
+        }
       }
     }).catch(() => {});
   }, []);
