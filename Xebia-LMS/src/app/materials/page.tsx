@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useApp } from "../../lib/context";
 import { Material } from "../../types";
 import Filters from "../../components/filters/Filters";
-import { FileText, Download, UploadCloud, Trash2, Eye, X, Plus, Search } from "lucide-react";
+import { FileText, Download, UploadCloud, Trash2, Eye, X, Plus, Search, Loader2 } from "lucide-react";
 import { apiService } from "../../lib/apiService";
 import FilePreviewModal from "../../components/files/FilePreviewModal";
 
@@ -20,6 +20,19 @@ export default function MaterialsPage() {
   const [materialSubject, setMaterialSubject] = useState("");
   const [materialBatch, setMaterialBatch] = useState("Batch A");
   const [materialFile, setMaterialFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const [batches, setBatches] = useState<string[]>(["Batch A", "Batch B", "Batch C", "Batch D"]);
+
+  // Load batches from backend
+  useEffect(() => {
+    apiService.getBatches().then((data) => {
+      if (data && data.length > 0) {
+        setBatches(data.map((b: any) => b.batchName || b.name || b));
+        setMaterialBatch(data[0].batchName || data[0].name || data[0]);
+      }
+    }).catch(() => {});
+  }, []);
 
   // File Preview States
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -85,9 +98,12 @@ export default function MaterialsPage() {
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!materialTitle || !materialSubject || !materialFile) {
-      alert("Please fill in all fields and select a file.");
+      setUploadError("Please fill in all fields and select a file.");
       return;
     }
+
+    setUploading(true);
+    setUploadError("");
 
     try {
       // 1. Upload file to backend
@@ -102,20 +118,23 @@ export default function MaterialsPage() {
         fileName: uploadedFile.originalName,
         fileSize: (uploadedFile.size / (1024 * 1024)).toFixed(1) + " MB",
         fileUrl: uploadedFile.fileUrl,
-        uploadedBy: currentUser?.name || "Shan Ali",
+        uploadedBy: currentUser?.name || "Admin",
         uploadedAt: new Date().toISOString()
       };
 
       await uploadMaterial(newMaterial);
       
-      // Reset state
+      // Reset state on success
       setShowUploadModal(false);
       setMaterialTitle("");
       setMaterialSubject("");
       setMaterialFile(null);
-    } catch (err) {
+      setUploadError("");
+    } catch (err: any) {
       console.error("Error uploading material:", err);
-      alert("Failed to upload material. Please try again.");
+      setUploadError(err?.message || "Failed to upload material. Please check your connection and try again.");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -247,6 +266,12 @@ export default function MaterialsPage() {
               </button>
             </div>
             <form onSubmit={handleUpload} className="p-6 space-y-4">
+              {uploadError && (
+                <div className="p-3 bg-rose-50 border border-rose-100 rounded-xl text-xs font-semibold text-rose-700">
+                  ⚠ {uploadError}
+                </div>
+              )}
+
               <div className="space-y-1">
                 <label className="text-xs font-bold text-text-muted uppercase tracking-wider">Document Title</label>
                 <input
@@ -255,6 +280,7 @@ export default function MaterialsPage() {
                   onChange={(e) => setMaterialTitle(e.target.value)}
                   placeholder="e.g. Next.js 15 App Router Reference Cheatsheet"
                   className="w-full bg-[#F7F8FC] border border-border rounded-xl px-3 py-2 text-xs outline-none focus:border-primary font-semibold"
+                  disabled={uploading}
                   required
                 />
               </div>
@@ -267,6 +293,7 @@ export default function MaterialsPage() {
                   onChange={(e) => setMaterialSubject(e.target.value)}
                   placeholder="e.g. Front-end Development"
                   className="w-full bg-[#F7F8FC] border border-border rounded-xl px-3 py-2 text-xs outline-none focus:border-primary font-semibold"
+                  disabled={uploading}
                   required
                 />
               </div>
@@ -277,33 +304,44 @@ export default function MaterialsPage() {
                   value={materialBatch}
                   onChange={(e) => setMaterialBatch(e.target.value)}
                   className="w-full bg-[#F7F8FC] border border-border rounded-xl px-3 py-2 text-xs outline-none focus:border-primary font-semibold cursor-pointer"
+                  disabled={uploading}
                 >
-                  <option value="Batch A">Batch A</option>
-                  <option value="Batch B">Batch B</option>
-                  <option value="Batch C">Batch C</option>
-                  <option value="Batch D">Batch D</option>
+                  {batches.map((b) => (
+                    <option key={b} value={b}>{b}</option>
+                  ))}
                 </select>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-text-muted uppercase tracking-wider font-semibold">Select File</label>
+                <label className="text-xs font-bold text-text-muted uppercase tracking-wider">Select File</label>
                 <input
                   type="file"
                   onChange={(e) => {
                     if (e.target.files && e.target.files.length > 0) {
                       setMaterialFile(e.target.files[0]);
+                      setUploadError("");
                     }
                   }}
-                  className="w-full border border-dashed border-border rounded-xl p-4 text-xs font-bold text-text-muted cursor-pointer"
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.png,.jpg,.jpeg"
+                  className="w-full border border-dashed border-border rounded-xl p-4 text-xs font-bold text-text-muted cursor-pointer disabled:opacity-50"
+                  disabled={uploading}
                   required
                 />
+                {materialFile && (
+                  <p className="text-[11px] text-emerald-600 font-bold mt-1">✓ {materialFile.name} ({(materialFile.size / (1024*1024)).toFixed(2)} MB)</p>
+                )}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded-xl text-xs uppercase cursor-pointer transition-all shadow-xs"
+                disabled={uploading}
+                className="w-full bg-primary hover:bg-primary-dark disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl text-xs uppercase cursor-pointer transition-all shadow-xs flex items-center justify-center gap-2"
               >
-                Upload File
+                {uploading ? (
+                  <><Loader2 size={14} className="animate-spin" /> Uploading...</>
+                ) : (
+                  <><UploadCloud size={14} /> Upload File</>
+                )}
               </button>
             </form>
           </div>
