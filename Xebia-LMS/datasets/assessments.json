@@ -1,0 +1,2287 @@
+[
+  {
+    "id": "a-1",
+    "title": "React & Next.js - Advanced Components Assessment",
+    "subject": "Front-end Development",
+    "batch": "Batch A",
+    "batches": [
+      "Batch A"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-14T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-1-1",
+        "text": "Provide a detailed critique on the scalability of React & Next.js.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-1-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-2",
+    "title": "Node.js & Express - Database Architecture Exam",
+    "subject": "Back-end Development",
+    "batch": "Batch B",
+    "batches": [
+      "Batch B"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-15T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-2-1",
+        "text": "Identify the main advantage of using Node.js & Express patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-2-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-2-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-3",
+    "title": "Agile & Scrum - Agile Practices Review",
+    "subject": "Project Management",
+    "batch": "Batch C",
+    "batches": [
+      "Batch C"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-16T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-3-1",
+        "text": "Provide a detailed critique on the scalability of Agile & Scrum.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-3-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-4",
+    "title": "AWS & Docker - Infrastructure Deployment Test",
+    "subject": "Cloud DevOps Engineering",
+    "batch": "Batch D",
+    "batches": [
+      "Batch D"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-17T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-4-1",
+        "text": "Identify the main advantage of using AWS & Docker patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-4-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-4-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-5",
+    "title": "Python & TensorFlow - Statistical Models Evaluation",
+    "subject": "Data Science & AI",
+    "batch": "Batch E",
+    "batches": [
+      "Batch E"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-18T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-5-1",
+        "text": "Provide a detailed critique on the scalability of Python & TensorFlow.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-5-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ],
+    "fileName": "document_guide_5.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_5.pdf",
+    "file": {
+      "filename": "document_guide_5.pdf",
+      "originalName": "document_guide_5.pdf",
+      "fileUrl": "/api/files/preview/document_guide_5.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-6",
+    "title": "Security Auditing - Threat Vector Identification",
+    "subject": "Cyber Security",
+    "batch": "Batch F",
+    "batches": [
+      "Batch F"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-19T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-6-1",
+        "text": "Identify the main advantage of using Security Auditing patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-6-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-6-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-7",
+    "title": "React Native & Flutter - State Management Deep Dive",
+    "subject": "Mobile App Development",
+    "batch": "Batch G",
+    "batches": [
+      "Batch G"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-13T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-7-1",
+        "text": "Provide a detailed critique on the scalability of React Native & Flutter.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-7-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-8",
+    "title": "Design Principles - Core Principles Quiz",
+    "subject": "UI/UX Design",
+    "batch": "Batch H",
+    "batches": [
+      "Batch H"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-14T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-8-1",
+        "text": "Identify the main advantage of using Design Principles patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-8-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-8-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-9",
+    "title": "React & Next.js - Advanced Components Assessment",
+    "subject": "Front-end Development",
+    "batch": "Batch I",
+    "batches": [
+      "Batch I"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-15T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-9-1",
+        "text": "Provide a detailed critique on the scalability of React & Next.js.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-9-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-10",
+    "title": "Node.js & Express - Database Architecture Exam",
+    "subject": "Back-end Development",
+    "batch": "Batch J",
+    "batches": [
+      "Batch J"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-16T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-10-1",
+        "text": "Identify the main advantage of using Node.js & Express patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-10-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-10-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ],
+    "fileName": "document_guide_10.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_10.pdf",
+    "file": {
+      "filename": "document_guide_10.pdf",
+      "originalName": "document_guide_10.pdf",
+      "fileUrl": "/api/files/preview/document_guide_10.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-11",
+    "title": "Agile & Scrum - Agile Practices Review",
+    "subject": "Project Management",
+    "batch": "Batch K",
+    "batches": [
+      "Batch K"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-17T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-11-1",
+        "text": "Provide a detailed critique on the scalability of Agile & Scrum.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-11-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-12",
+    "title": "AWS & Docker - Infrastructure Deployment Test",
+    "subject": "Cloud DevOps Engineering",
+    "batch": "Batch L",
+    "batches": [
+      "Batch L"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-18T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-12-1",
+        "text": "Identify the main advantage of using AWS & Docker patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-12-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-12-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-13",
+    "title": "Python & TensorFlow - Statistical Models Evaluation",
+    "subject": "Data Science & AI",
+    "batch": "Batch M",
+    "batches": [
+      "Batch M"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-19T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-13-1",
+        "text": "Provide a detailed critique on the scalability of Python & TensorFlow.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-13-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-14",
+    "title": "Security Auditing - Threat Vector Identification",
+    "subject": "Cyber Security",
+    "batch": "Batch N",
+    "batches": [
+      "Batch N"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-13T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-14-1",
+        "text": "Identify the main advantage of using Security Auditing patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-14-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-14-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-15",
+    "title": "React Native & Flutter - State Management Deep Dive",
+    "subject": "Mobile App Development",
+    "batch": "Batch O",
+    "batches": [
+      "Batch O"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-14T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-15-1",
+        "text": "Provide a detailed critique on the scalability of React Native & Flutter.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-15-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ],
+    "fileName": "document_guide_15.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_15.pdf",
+    "file": {
+      "filename": "document_guide_15.pdf",
+      "originalName": "document_guide_15.pdf",
+      "fileUrl": "/api/files/preview/document_guide_15.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-16",
+    "title": "Design Principles - Core Principles Quiz",
+    "subject": "UI/UX Design",
+    "batch": "Batch P",
+    "batches": [
+      "Batch P"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-15T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-16-1",
+        "text": "Identify the main advantage of using Design Principles patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-16-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-16-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-17",
+    "title": "React & Next.js - Advanced Components Assessment",
+    "subject": "Front-end Development",
+    "batch": "Batch Q",
+    "batches": [
+      "Batch Q"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-16T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-17-1",
+        "text": "Provide a detailed critique on the scalability of React & Next.js.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-17-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-18",
+    "title": "Node.js & Express - Database Architecture Exam",
+    "subject": "Back-end Development",
+    "batch": "Batch R",
+    "batches": [
+      "Batch R"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-17T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-18-1",
+        "text": "Identify the main advantage of using Node.js & Express patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-18-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-18-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-19",
+    "title": "Agile & Scrum - Agile Practices Review",
+    "subject": "Project Management",
+    "batch": "Batch S",
+    "batches": [
+      "Batch S"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-18T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-19-1",
+        "text": "Provide a detailed critique on the scalability of Agile & Scrum.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-19-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-20",
+    "title": "AWS & Docker - Infrastructure Deployment Test",
+    "subject": "Cloud DevOps Engineering",
+    "batch": "Batch T",
+    "batches": [
+      "Batch T"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-19T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-20-1",
+        "text": "Identify the main advantage of using AWS & Docker patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-20-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-20-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ],
+    "fileName": "document_guide_20.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_20.pdf",
+    "file": {
+      "filename": "document_guide_20.pdf",
+      "originalName": "document_guide_20.pdf",
+      "fileUrl": "/api/files/preview/document_guide_20.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-21",
+    "title": "Python & TensorFlow - Statistical Models Evaluation",
+    "subject": "Data Science & AI",
+    "batch": "Batch U",
+    "batches": [
+      "Batch U"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-13T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-21-1",
+        "text": "Provide a detailed critique on the scalability of Python & TensorFlow.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-21-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-22",
+    "title": "Security Auditing - Threat Vector Identification",
+    "subject": "Cyber Security",
+    "batch": "Batch V",
+    "batches": [
+      "Batch V"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-14T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-22-1",
+        "text": "Identify the main advantage of using Security Auditing patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-22-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-22-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-23",
+    "title": "React Native & Flutter - State Management Deep Dive",
+    "subject": "Mobile App Development",
+    "batch": "Batch W",
+    "batches": [
+      "Batch W"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-15T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-23-1",
+        "text": "Provide a detailed critique on the scalability of React Native & Flutter.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-23-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-24",
+    "title": "Design Principles - Core Principles Quiz",
+    "subject": "UI/UX Design",
+    "batch": "Batch X",
+    "batches": [
+      "Batch X"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-16T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-24-1",
+        "text": "Identify the main advantage of using Design Principles patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-24-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-24-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-25",
+    "title": "React & Next.js - Advanced Components Assessment",
+    "subject": "Front-end Development",
+    "batch": "Batch Y",
+    "batches": [
+      "Batch Y"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-17T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-25-1",
+        "text": "Provide a detailed critique on the scalability of React & Next.js.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-25-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ],
+    "fileName": "document_guide_25.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_25.pdf",
+    "file": {
+      "filename": "document_guide_25.pdf",
+      "originalName": "document_guide_25.pdf",
+      "fileUrl": "/api/files/preview/document_guide_25.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-26",
+    "title": "Node.js & Express - Database Architecture Exam",
+    "subject": "Back-end Development",
+    "batch": "Batch Z",
+    "batches": [
+      "Batch Z"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-18T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-26-1",
+        "text": "Identify the main advantage of using Node.js & Express patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-26-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-26-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-27",
+    "title": "Agile & Scrum - Agile Practices Review",
+    "subject": "Project Management",
+    "batch": "Batch A 2",
+    "batches": [
+      "Batch A 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-19T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-27-1",
+        "text": "Provide a detailed critique on the scalability of Agile & Scrum.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-27-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-28",
+    "title": "AWS & Docker - Infrastructure Deployment Test",
+    "subject": "Cloud DevOps Engineering",
+    "batch": "Batch B 2",
+    "batches": [
+      "Batch B 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-13T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-28-1",
+        "text": "Identify the main advantage of using AWS & Docker patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-28-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-28-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-29",
+    "title": "Python & TensorFlow - Statistical Models Evaluation",
+    "subject": "Data Science & AI",
+    "batch": "Batch C 2",
+    "batches": [
+      "Batch C 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-14T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-29-1",
+        "text": "Provide a detailed critique on the scalability of Python & TensorFlow.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-29-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-30",
+    "title": "Security Auditing - Threat Vector Identification",
+    "subject": "Cyber Security",
+    "batch": "Batch D 2",
+    "batches": [
+      "Batch D 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-15T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-30-1",
+        "text": "Identify the main advantage of using Security Auditing patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-30-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-30-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ],
+    "fileName": "document_guide_30.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_30.pdf",
+    "file": {
+      "filename": "document_guide_30.pdf",
+      "originalName": "document_guide_30.pdf",
+      "fileUrl": "/api/files/preview/document_guide_30.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-31",
+    "title": "React Native & Flutter - State Management Deep Dive",
+    "subject": "Mobile App Development",
+    "batch": "Batch E 2",
+    "batches": [
+      "Batch E 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-16T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-31-1",
+        "text": "Provide a detailed critique on the scalability of React Native & Flutter.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-31-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-32",
+    "title": "Design Principles - Core Principles Quiz",
+    "subject": "UI/UX Design",
+    "batch": "Batch F 2",
+    "batches": [
+      "Batch F 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-17T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-32-1",
+        "text": "Identify the main advantage of using Design Principles patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-32-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-32-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-33",
+    "title": "React & Next.js - Advanced Components Assessment",
+    "subject": "Front-end Development",
+    "batch": "Batch G 2",
+    "batches": [
+      "Batch G 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-18T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-33-1",
+        "text": "Provide a detailed critique on the scalability of React & Next.js.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-33-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-34",
+    "title": "Node.js & Express - Database Architecture Exam",
+    "subject": "Back-end Development",
+    "batch": "Batch H 2",
+    "batches": [
+      "Batch H 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-19T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-34-1",
+        "text": "Identify the main advantage of using Node.js & Express patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-34-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-34-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-35",
+    "title": "Agile & Scrum - Agile Practices Review",
+    "subject": "Project Management",
+    "batch": "Batch I 2",
+    "batches": [
+      "Batch I 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-13T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-35-1",
+        "text": "Provide a detailed critique on the scalability of Agile & Scrum.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-35-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ],
+    "fileName": "document_guide_35.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_35.pdf",
+    "file": {
+      "filename": "document_guide_35.pdf",
+      "originalName": "document_guide_35.pdf",
+      "fileUrl": "/api/files/preview/document_guide_35.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-36",
+    "title": "AWS & Docker - Infrastructure Deployment Test",
+    "subject": "Cloud DevOps Engineering",
+    "batch": "Batch J 2",
+    "batches": [
+      "Batch J 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-14T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-36-1",
+        "text": "Identify the main advantage of using AWS & Docker patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-36-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-36-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-37",
+    "title": "Python & TensorFlow - Statistical Models Evaluation",
+    "subject": "Data Science & AI",
+    "batch": "Batch K 2",
+    "batches": [
+      "Batch K 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-15T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-37-1",
+        "text": "Provide a detailed critique on the scalability of Python & TensorFlow.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-37-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-38",
+    "title": "Security Auditing - Threat Vector Identification",
+    "subject": "Cyber Security",
+    "batch": "Batch L 2",
+    "batches": [
+      "Batch L 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-16T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-38-1",
+        "text": "Identify the main advantage of using Security Auditing patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-38-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-38-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-39",
+    "title": "React Native & Flutter - State Management Deep Dive",
+    "subject": "Mobile App Development",
+    "batch": "Batch M 2",
+    "batches": [
+      "Batch M 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-17T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-39-1",
+        "text": "Provide a detailed critique on the scalability of React Native & Flutter.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-39-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-40",
+    "title": "Design Principles - Core Principles Quiz",
+    "subject": "UI/UX Design",
+    "batch": "Batch N 2",
+    "batches": [
+      "Batch N 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-18T16:52",
+    "status": "published",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-40-1",
+        "text": "Identify the main advantage of using Design Principles patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-40-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-40-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ],
+    "fileName": "document_guide_40.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_40.pdf",
+    "file": {
+      "filename": "document_guide_40.pdf",
+      "originalName": "document_guide_40.pdf",
+      "fileUrl": "/api/files/preview/document_guide_40.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-41",
+    "title": "React & Next.js - Advanced Components Assessment",
+    "subject": "Front-end Development",
+    "batch": "Batch O 2",
+    "batches": [
+      "Batch O 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-19T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-41-1",
+        "text": "Provide a detailed critique on the scalability of React & Next.js.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-41-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-42",
+    "title": "Node.js & Express - Database Architecture Exam",
+    "subject": "Back-end Development",
+    "batch": "Batch P 2",
+    "batches": [
+      "Batch P 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-13T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-42-1",
+        "text": "Identify the main advantage of using Node.js & Express patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-42-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-42-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-43",
+    "title": "Agile & Scrum - Agile Practices Review",
+    "subject": "Project Management",
+    "batch": "Batch Q 2",
+    "batches": [
+      "Batch Q 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-14T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-43-1",
+        "text": "Provide a detailed critique on the scalability of Agile & Scrum.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-43-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-44",
+    "title": "AWS & Docker - Infrastructure Deployment Test",
+    "subject": "Cloud DevOps Engineering",
+    "batch": "Batch R 2",
+    "batches": [
+      "Batch R 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-15T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-44-1",
+        "text": "Identify the main advantage of using AWS & Docker patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-44-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-44-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-45",
+    "title": "Python & TensorFlow - Statistical Models Evaluation",
+    "subject": "Data Science & AI",
+    "batch": "Batch S 2",
+    "batches": [
+      "Batch S 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-16T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-45-1",
+        "text": "Provide a detailed critique on the scalability of Python & TensorFlow.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-45-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ],
+    "fileName": "document_guide_45.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_45.pdf",
+    "file": {
+      "filename": "document_guide_45.pdf",
+      "originalName": "document_guide_45.pdf",
+      "fileUrl": "/api/files/preview/document_guide_45.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  },
+  {
+    "id": "a-46",
+    "title": "Security Auditing - Threat Vector Identification",
+    "subject": "Cyber Security",
+    "batch": "Batch T 2",
+    "batches": [
+      "Batch T 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-17T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-46-1",
+        "text": "Identify the main advantage of using Security Auditing patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-46-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-46-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-47",
+    "title": "React Native & Flutter - State Management Deep Dive",
+    "subject": "Mobile App Development",
+    "batch": "Batch U 2",
+    "batches": [
+      "Batch U 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-18T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-47-1",
+        "text": "Provide a detailed critique on the scalability of React Native & Flutter.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-47-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-48",
+    "title": "Design Principles - Core Principles Quiz",
+    "subject": "UI/UX Design",
+    "batch": "Batch V 2",
+    "batches": [
+      "Batch V 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-19T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-48-1",
+        "text": "Identify the main advantage of using Design Principles patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-48-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-48-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "id": "a-49",
+    "title": "React & Next.js - Advanced Components Assessment",
+    "subject": "Front-end Development",
+    "batch": "Batch W 2",
+    "batches": [
+      "Batch W 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "written",
+    "totalMarks": 50,
+    "deadline": "2026-07-13T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-49-1",
+        "text": "Provide a detailed critique on the scalability of React & Next.js.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      },
+      {
+        "id": "q-49-2",
+        "text": "Explain a real-world scenario where the default configurations fail.",
+        "type": "written",
+        "options": [],
+        "marks": 25
+      }
+    ]
+  },
+  {
+    "id": "a-50",
+    "title": "Node.js & Express - Database Architecture Exam",
+    "subject": "Back-end Development",
+    "batch": "Batch X 2",
+    "batches": [
+      "Batch X 2"
+    ],
+    "instructions": "Please complete all parts carefully. Late submissions will face penalties.",
+    "questionType": "mcq",
+    "totalMarks": 30,
+    "deadline": "2026-07-14T16:52",
+    "status": "draft",
+    "createdAt": "2026-07-06T16:52:03.497Z",
+    "questions": [
+      {
+        "id": "q-50-1",
+        "text": "Identify the main advantage of using Node.js & Express patterns.",
+        "type": "mcq",
+        "options": [
+          "Improved Performance",
+          "Reduced Maintenance",
+          "Enhanced Security",
+          "All of the above"
+        ],
+        "correctAnswer": "All of the above",
+        "marks": 10
+      },
+      {
+        "id": "q-50-2",
+        "text": "Which standard describes the baseline specification for this module?",
+        "type": "mcq",
+        "options": [
+          "RFC-2119",
+          "ISO-27001",
+          "IEEE-829",
+          "W3C Recommendation"
+        ],
+        "correctAnswer": "RFC-2119",
+        "marks": 10
+      },
+      {
+        "id": "q-50-3",
+        "text": "What is the default configuration parameter for initialization?",
+        "type": "mcq",
+        "options": [
+          "production=true",
+          "mode=debug",
+          "env=development",
+          "autoConfigure=false"
+        ],
+        "correctAnswer": "mode=debug",
+        "marks": 10
+      }
+    ],
+    "fileName": "document_guide_50.pdf",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/api/files/preview/document_guide_50.pdf",
+    "file": {
+      "filename": "document_guide_50.pdf",
+      "originalName": "document_guide_50.pdf",
+      "fileUrl": "/api/files/preview/document_guide_50.pdf",
+      "mimeType": "application/pdf",
+      "size": 1572864,
+      "uploadedAt": "2026-07-06T16:52:03.497Z"
+    }
+  }
+]

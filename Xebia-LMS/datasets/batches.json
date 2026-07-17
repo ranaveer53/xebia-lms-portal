@@ -1,0 +1,402 @@
+[
+  {
+    "id": "b-1",
+    "batchName": "Batch A",
+    "course": "Front-end Development",
+    "subject": "React & Next.js",
+    "createdAt": "2026-07-15T16:52:03.487Z",
+    "updatedAt": "2026-07-16T04:52:03.491Z"
+  },
+  {
+    "id": "b-2",
+    "batchName": "Batch B",
+    "course": "Back-end Development",
+    "subject": "Node.js & Express",
+    "createdAt": "2026-07-14T16:52:03.491Z",
+    "updatedAt": "2026-07-15T16:52:03.491Z"
+  },
+  {
+    "id": "b-3",
+    "batchName": "Batch C",
+    "course": "Project Management",
+    "subject": "Agile & Scrum",
+    "createdAt": "2026-07-13T16:52:03.491Z",
+    "updatedAt": "2026-07-15T04:52:03.491Z"
+  },
+  {
+    "id": "b-4",
+    "batchName": "Batch D",
+    "course": "Cloud DevOps Engineering",
+    "subject": "AWS & Docker",
+    "createdAt": "2026-07-12T16:52:03.491Z",
+    "updatedAt": "2026-07-14T16:52:03.491Z"
+  },
+  {
+    "id": "b-5",
+    "batchName": "Batch E",
+    "course": "Data Science & AI",
+    "subject": "Python & TensorFlow",
+    "createdAt": "2026-07-11T16:52:03.491Z",
+    "updatedAt": "2026-07-14T04:52:03.491Z"
+  },
+  {
+    "id": "b-6",
+    "batchName": "Batch F",
+    "course": "Cyber Security",
+    "subject": "Security Auditing",
+    "createdAt": "2026-07-10T16:52:03.491Z",
+    "updatedAt": "2026-07-13T16:52:03.491Z"
+  },
+  {
+    "id": "b-7",
+    "batchName": "Batch G",
+    "course": "Mobile App Development",
+    "subject": "React Native & Flutter",
+    "createdAt": "2026-07-09T16:52:03.491Z",
+    "updatedAt": "2026-07-13T04:52:03.491Z"
+  },
+  {
+    "id": "b-8",
+    "batchName": "Batch H",
+    "course": "UI/UX Design",
+    "subject": "Design Principles",
+    "createdAt": "2026-07-08T16:52:03.491Z",
+    "updatedAt": "2026-07-12T16:52:03.491Z"
+  },
+  {
+    "id": "b-9",
+    "batchName": "Batch I",
+    "course": "Front-end Development",
+    "subject": "React & Next.js",
+    "createdAt": "2026-07-07T16:52:03.491Z",
+    "updatedAt": "2026-07-12T04:52:03.491Z"
+  },
+  {
+    "id": "b-10",
+    "batchName": "Batch J",
+    "course": "Back-end Development",
+    "subject": "Node.js & Express",
+    "createdAt": "2026-07-06T16:52:03.491Z",
+    "updatedAt": "2026-07-11T16:52:03.491Z"
+  },
+  {
+    "id": "b-11",
+    "batchName": "Batch K",
+    "course": "Project Management",
+    "subject": "Agile & Scrum",
+    "createdAt": "2026-07-05T16:52:03.491Z",
+    "updatedAt": "2026-07-11T04:52:03.491Z"
+  },
+  {
+    "id": "b-12",
+    "batchName": "Batch L",
+    "course": "Cloud DevOps Engineering",
+    "subject": "AWS & Docker",
+    "createdAt": "2026-07-04T16:52:03.491Z",
+    "updatedAt": "2026-07-10T16:52:03.491Z"
+  },
+  {
+    "id": "b-13",
+    "batchName": "Batch M",
+    "course": "Data Science & AI",
+    "subject": "Python & TensorFlow",
+    "createdAt": "2026-07-03T16:52:03.491Z",
+    "updatedAt": "2026-07-10T04:52:03.491Z"
+  },
+  {
+    "id": "b-14",
+    "batchName": "Batch N",
+    "course": "Cyber Security",
+    "subject": "Security Auditing",
+    "createdAt": "2026-07-02T16:52:03.491Z",
+    "updatedAt": "2026-07-09T16:52:03.491Z"
+  },
+  {
+    "id": "b-15",
+    "batchName": "Batch O",
+    "course": "Mobile App Development",
+    "subject": "React Native & Flutter",
+    "createdAt": "2026-07-01T16:52:03.491Z",
+    "updatedAt": "2026-07-09T04:52:03.491Z"
+  },
+  {
+    "id": "b-16",
+    "batchName": "Batch P",
+    "course": "UI/UX Design",
+    "subject": "Design Principles",
+    "createdAt": "2026-06-30T16:52:03.491Z",
+    "updatedAt": "2026-07-08T16:52:03.491Z"
+  },
+  {
+    "id": "b-17",
+    "batchName": "Batch Q",
+    "course": "Front-end Development",
+    "subject": "React & Next.js",
+    "createdAt": "2026-06-29T16:52:03.491Z",
+    "updatedAt": "2026-07-08T04:52:03.491Z"
+  },
+  {
+    "id": "b-18",
+    "batchName": "Batch R",
+    "course": "Back-end Development",
+    "subject": "Node.js & Express",
+    "createdAt": "2026-06-28T16:52:03.491Z",
+    "updatedAt": "2026-07-07T16:52:03.491Z"
+  },
+  {
+    "id": "b-19",
+    "batchName": "Batch S",
+    "course": "Project Management",
+    "subject": "Agile & Scrum",
+    "createdAt": "2026-06-27T16:52:03.491Z",
+    "updatedAt": "2026-07-07T04:52:03.491Z"
+  },
+  {
+    "id": "b-20",
+    "batchName": "Batch T",
+    "course": "Cloud DevOps Engineering",
+    "subject": "AWS & Docker",
+    "createdAt": "2026-06-26T16:52:03.491Z",
+    "updatedAt": "2026-07-06T16:52:03.491Z"
+  },
+  {
+    "id": "b-21",
+    "batchName": "Batch U",
+    "course": "Data Science & AI",
+    "subject": "Python & TensorFlow",
+    "createdAt": "2026-06-25T16:52:03.491Z",
+    "updatedAt": "2026-07-06T04:52:03.491Z"
+  },
+  {
+    "id": "b-22",
+    "batchName": "Batch V",
+    "course": "Cyber Security",
+    "subject": "Security Auditing",
+    "createdAt": "2026-06-24T16:52:03.491Z",
+    "updatedAt": "2026-07-05T16:52:03.491Z"
+  },
+  {
+    "id": "b-23",
+    "batchName": "Batch W",
+    "course": "Mobile App Development",
+    "subject": "React Native & Flutter",
+    "createdAt": "2026-06-23T16:52:03.491Z",
+    "updatedAt": "2026-07-05T04:52:03.491Z"
+  },
+  {
+    "id": "b-24",
+    "batchName": "Batch X",
+    "course": "UI/UX Design",
+    "subject": "Design Principles",
+    "createdAt": "2026-06-22T16:52:03.491Z",
+    "updatedAt": "2026-07-04T16:52:03.491Z"
+  },
+  {
+    "id": "b-25",
+    "batchName": "Batch Y",
+    "course": "Front-end Development",
+    "subject": "React & Next.js",
+    "createdAt": "2026-06-21T16:52:03.491Z",
+    "updatedAt": "2026-07-04T04:52:03.491Z"
+  },
+  {
+    "id": "b-26",
+    "batchName": "Batch Z",
+    "course": "Back-end Development",
+    "subject": "Node.js & Express",
+    "createdAt": "2026-06-20T16:52:03.491Z",
+    "updatedAt": "2026-07-03T16:52:03.491Z"
+  },
+  {
+    "id": "b-27",
+    "batchName": "Batch A 2",
+    "course": "Project Management",
+    "subject": "Agile & Scrum",
+    "createdAt": "2026-06-19T16:52:03.491Z",
+    "updatedAt": "2026-07-03T04:52:03.491Z"
+  },
+  {
+    "id": "b-28",
+    "batchName": "Batch B 2",
+    "course": "Cloud DevOps Engineering",
+    "subject": "AWS & Docker",
+    "createdAt": "2026-06-18T16:52:03.491Z",
+    "updatedAt": "2026-07-02T16:52:03.491Z"
+  },
+  {
+    "id": "b-29",
+    "batchName": "Batch C 2",
+    "course": "Data Science & AI",
+    "subject": "Python & TensorFlow",
+    "createdAt": "2026-06-17T16:52:03.491Z",
+    "updatedAt": "2026-07-02T04:52:03.491Z"
+  },
+  {
+    "id": "b-30",
+    "batchName": "Batch D 2",
+    "course": "Cyber Security",
+    "subject": "Security Auditing",
+    "createdAt": "2026-06-16T16:52:03.491Z",
+    "updatedAt": "2026-07-01T16:52:03.491Z"
+  },
+  {
+    "id": "b-31",
+    "batchName": "Batch E 2",
+    "course": "Mobile App Development",
+    "subject": "React Native & Flutter",
+    "createdAt": "2026-06-15T16:52:03.491Z",
+    "updatedAt": "2026-07-01T04:52:03.491Z"
+  },
+  {
+    "id": "b-32",
+    "batchName": "Batch F 2",
+    "course": "UI/UX Design",
+    "subject": "Design Principles",
+    "createdAt": "2026-06-14T16:52:03.491Z",
+    "updatedAt": "2026-06-30T16:52:03.491Z"
+  },
+  {
+    "id": "b-33",
+    "batchName": "Batch G 2",
+    "course": "Front-end Development",
+    "subject": "React & Next.js",
+    "createdAt": "2026-06-13T16:52:03.491Z",
+    "updatedAt": "2026-06-30T04:52:03.491Z"
+  },
+  {
+    "id": "b-34",
+    "batchName": "Batch H 2",
+    "course": "Back-end Development",
+    "subject": "Node.js & Express",
+    "createdAt": "2026-06-12T16:52:03.491Z",
+    "updatedAt": "2026-06-29T16:52:03.491Z"
+  },
+  {
+    "id": "b-35",
+    "batchName": "Batch I 2",
+    "course": "Project Management",
+    "subject": "Agile & Scrum",
+    "createdAt": "2026-06-11T16:52:03.491Z",
+    "updatedAt": "2026-06-29T04:52:03.491Z"
+  },
+  {
+    "id": "b-36",
+    "batchName": "Batch J 2",
+    "course": "Cloud DevOps Engineering",
+    "subject": "AWS & Docker",
+    "createdAt": "2026-06-10T16:52:03.491Z",
+    "updatedAt": "2026-06-28T16:52:03.491Z"
+  },
+  {
+    "id": "b-37",
+    "batchName": "Batch K 2",
+    "course": "Data Science & AI",
+    "subject": "Python & TensorFlow",
+    "createdAt": "2026-06-09T16:52:03.491Z",
+    "updatedAt": "2026-06-28T04:52:03.491Z"
+  },
+  {
+    "id": "b-38",
+    "batchName": "Batch L 2",
+    "course": "Cyber Security",
+    "subject": "Security Auditing",
+    "createdAt": "2026-06-08T16:52:03.491Z",
+    "updatedAt": "2026-06-27T16:52:03.491Z"
+  },
+  {
+    "id": "b-39",
+    "batchName": "Batch M 2",
+    "course": "Mobile App Development",
+    "subject": "React Native & Flutter",
+    "createdAt": "2026-06-07T16:52:03.491Z",
+    "updatedAt": "2026-06-27T04:52:03.491Z"
+  },
+  {
+    "id": "b-40",
+    "batchName": "Batch N 2",
+    "course": "UI/UX Design",
+    "subject": "Design Principles",
+    "createdAt": "2026-06-06T16:52:03.491Z",
+    "updatedAt": "2026-06-26T16:52:03.491Z"
+  },
+  {
+    "id": "b-41",
+    "batchName": "Batch O 2",
+    "course": "Front-end Development",
+    "subject": "React & Next.js",
+    "createdAt": "2026-06-05T16:52:03.491Z",
+    "updatedAt": "2026-06-26T04:52:03.491Z"
+  },
+  {
+    "id": "b-42",
+    "batchName": "Batch P 2",
+    "course": "Back-end Development",
+    "subject": "Node.js & Express",
+    "createdAt": "2026-06-04T16:52:03.491Z",
+    "updatedAt": "2026-06-25T16:52:03.491Z"
+  },
+  {
+    "id": "b-43",
+    "batchName": "Batch Q 2",
+    "course": "Project Management",
+    "subject": "Agile & Scrum",
+    "createdAt": "2026-06-03T16:52:03.491Z",
+    "updatedAt": "2026-06-25T04:52:03.491Z"
+  },
+  {
+    "id": "b-44",
+    "batchName": "Batch R 2",
+    "course": "Cloud DevOps Engineering",
+    "subject": "AWS & Docker",
+    "createdAt": "2026-06-02T16:52:03.491Z",
+    "updatedAt": "2026-06-24T16:52:03.491Z"
+  },
+  {
+    "id": "b-45",
+    "batchName": "Batch S 2",
+    "course": "Data Science & AI",
+    "subject": "Python & TensorFlow",
+    "createdAt": "2026-06-01T16:52:03.491Z",
+    "updatedAt": "2026-06-24T04:52:03.491Z"
+  },
+  {
+    "id": "b-46",
+    "batchName": "Batch T 2",
+    "course": "Cyber Security",
+    "subject": "Security Auditing",
+    "createdAt": "2026-05-31T16:52:03.491Z",
+    "updatedAt": "2026-06-23T16:52:03.491Z"
+  },
+  {
+    "id": "b-47",
+    "batchName": "Batch U 2",
+    "course": "Mobile App Development",
+    "subject": "React Native & Flutter",
+    "createdAt": "2026-05-30T16:52:03.491Z",
+    "updatedAt": "2026-06-23T04:52:03.491Z"
+  },
+  {
+    "id": "b-48",
+    "batchName": "Batch V 2",
+    "course": "UI/UX Design",
+    "subject": "Design Principles",
+    "createdAt": "2026-05-29T16:52:03.491Z",
+    "updatedAt": "2026-06-22T16:52:03.491Z"
+  },
+  {
+    "id": "b-49",
+    "batchName": "Batch W 2",
+    "course": "Front-end Development",
+    "subject": "React & Next.js",
+    "createdAt": "2026-05-28T16:52:03.491Z",
+    "updatedAt": "2026-06-22T04:52:03.491Z"
+  },
+  {
+    "id": "b-50",
+    "batchName": "Batch X 2",
+    "course": "Back-end Development",
+    "subject": "Node.js & Express",
+    "createdAt": "2026-05-27T16:52:03.491Z",
+    "updatedAt": "2026-06-21T16:52:03.491Z"
+  }
+]
