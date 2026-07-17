@@ -158,7 +158,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const handleSubmitAssessment = async (submission: Submission) => {
     await apiService.submitAssessment(submission);
-    const updated = await apiService.getSubmissions();
+    // After learner submits, refresh only their own submissions
+    const filter = submission.learnerId ? { learnerId: submission.learnerId } : undefined;
+    const updated = await apiService.getSubmissions(filter);
     setSubmissions(updated);
   };
 
