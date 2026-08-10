@@ -21,6 +21,7 @@ import {
 function SubmissionsPageContent() {
   const { 
     currentUser, 
+    loading,
     submissions, 
     assessments, 
     gradeSubmission, 
@@ -28,6 +29,8 @@ function SubmissionsPageContent() {
     bulkReviewedSubmissions, 
     refreshSubmissions 
   } = useApp();
+
+
 
   const userRole = currentUser?.role || "learner";
 
@@ -73,13 +76,28 @@ function SubmissionsPageContent() {
     });
   }, [selectedAssessmentId, selectedBatches, selectedStatus, searchQuery, selectedTimeFilter, sortBy]);
 
-  if (userRole !== "teacher" && userRole !== "admin") {
+  const roleRaw = (currentUser?.role || "").toLowerCase().trim();
+  const isAuthorized = roleRaw === "teacher" || roleRaw === "admin" || roleRaw === "administrator" || roleRaw.includes("admin") || roleRaw.includes("teacher") || roleRaw.includes("instructor");
+
+
+
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!currentUser || !isAuthorized) {
     return (
       <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs font-bold text-rose-600">
         Access Denied. Only instructors and administrators can review student submissions.
       </div>
     );
   }
+
 
   // Calculate dynamic dashboard counters based on active filters
   const pendingCount = submissions.filter(s => s.status === "pending").length;

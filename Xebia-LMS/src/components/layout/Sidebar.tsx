@@ -32,8 +32,6 @@ export default function Sidebar({ isOpen, onClose, collapsed, onCollapseToggle }
   const router = useRouter();
   const { currentUser, logout } = useApp();
 
-  const userRole = currentUser?.role || "learner";
-
   const teacherLinks = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Classes", href: "/classes", icon: BookOpen },
@@ -59,7 +57,14 @@ export default function Sidebar({ isOpen, onClose, collapsed, onCollapseToggle }
     { name: "Profile", href: "/profile", icon: User }
   ];
 
-  const links = (userRole === "teacher" || userRole === "admin") ? teacherLinks : learnerLinks;
+  const roleRaw = (currentUser?.role || "").toLowerCase().trim();
+  const userRole = roleRaw;
+  const isTeacherOrAdmin = roleRaw === "teacher" || roleRaw === "admin" || roleRaw === "administrator" || roleRaw.includes("admin") || roleRaw.includes("teacher") || roleRaw.includes("instructor");
+
+
+  const links = isTeacherOrAdmin ? teacherLinks : learnerLinks;
+
+
 
   const handleLogout = () => {
     logout();

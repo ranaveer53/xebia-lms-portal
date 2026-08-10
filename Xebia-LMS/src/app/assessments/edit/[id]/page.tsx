@@ -24,7 +24,8 @@ import {
 export default function EditAssessmentPage() {
   const router = useRouter();
   const { id } = useParams();
-  const { currentUser, classes, saveAssessment } = useApp();
+  const { currentUser, classes, saveAssessment, loading } = useApp();
+
 
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
@@ -99,15 +100,25 @@ export default function EditAssessmentPage() {
     }
   }, [id]);
 
-  const userRole = currentUser?.role || "learner";
+  const roleRaw = (currentUser?.role || "").toLowerCase().trim();
+  const isAuthorized = roleRaw === "teacher" || roleRaw === "admin" || roleRaw === "administrator" || roleRaw.includes("admin") || roleRaw.includes("teacher") || roleRaw.includes("instructor");
 
-  if (userRole !== "teacher" && userRole !== "admin") {
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!currentUser || !isAuthorized) {
     return (
       <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs font-bold text-rose-600">
         Access Denied. Only instructors and administrators can build assessments.
       </div>
     );
   }
+
 
   // Options helpers
   const handleOptionChange = (idx: number, val: string) => {

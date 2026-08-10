@@ -8,14 +8,30 @@ import { useRouter } from "next/navigation";
 
 export default function LearnersPage() {
   const router = useRouter();
-  const { currentUser } = useApp();
+  const { currentUser, loading } = useApp();
   const [timeFilter, setTimeFilter] = useState("All");
   const [batchFilter, setBatchFilter] = useState("All Batches");
   const [search, setSearch] = useState("");
 
-  const userRole = currentUser?.role || "learner";
+  const roleRaw = (currentUser?.role || "").toLowerCase().trim();
+  const isAuthorized = roleRaw === "teacher" || roleRaw === "admin" || roleRaw === "administrator" || roleRaw.includes("admin") || roleRaw.includes("teacher") || roleRaw.includes("instructor");
 
-  // Mock list of students since our database only contains seed credentials
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-12">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!currentUser || !isAuthorized) {
+    return (
+      <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs font-bold text-rose-600">
+        Access Denied. Only instructors and administrators can view the Learners Directory.
+      </div>
+    );
+  }
+
   const studentsList = [
     { id: "l-1", name: "Flores Juanita", email: "learner@lms.com", batch: "Batch A", completed: 2, avgScore: "95%", status: "Active" },
     { id: "l-2", name: "John Doe", email: "john.doe@lms.com", batch: "Batch B", completed: 1, avgScore: "88%", status: "Active" },
@@ -23,14 +39,6 @@ export default function LearnersPage() {
     { id: "l-4", name: "Alex Mercer", email: "alex.mercer@lms.com", batch: "Batch C", completed: 0, avgScore: "N/A", status: "Inactive" },
     { id: "l-5", name: "Sarah Connor", email: "sarah.connor@lms.com", batch: "Batch D", completed: 1, avgScore: "78%", status: "Active" }
   ];
-
-  if (userRole !== "teacher" && userRole !== "admin") {
-    return (
-      <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-xs font-bold text-rose-600">
-        Access Denied. Only instructors and administrators can view the Learners Directory.
-      </div>
-    );
-  }
 
   const filteredStudents = studentsList.filter((s) => {
     if (batchFilter !== "All Batches" && s.batch !== batchFilter) return false;
