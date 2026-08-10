@@ -152,3 +152,27 @@ You can sign in to the portal using these local SSO credentials:
 | :--- | :--- | :--- | :---: |
 | **Learner Profile** | `learner@xebia.com` | `learner123` | `learner` |
 | **Admin Profile** | `admin@xebia.com` | `admin123` | `admin` |
+
+---
+
+## 8. Backend Deployment (Render.com)
+
+Since the Railway trial has expired, you can deploy the Spring Boot backend to Render.com (free tier) with one click using the button below:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ranaveer53/xebia-lms-portal)
+
+### Setup Steps on Render:
+1. Click the **Deploy to Render** button above.
+2. Log in to Render and configure the following environment variables:
+   * **`APP_CORS_ALLOWED_ORIGINS`**: `https://xebia-lms-portal-three.vercel.app`
+   * **`SPRING_PROFILES_ACTIVE`**: `demo`
+   * **`MONGODB_URI`**: *(Highly Recommended)* Set a connection string from a free MongoDB Atlas cluster to keep your assessments, submissions, materials, and classes persisted securely (e.g. `mongodb+srv://<user>:<password>@cluster.mongodb.net/employeeDB`).
+3. Click **Apply** or **Create Service**. Render will build the Docker container and start the backend.
+
+### Update Vercel Frontend:
+Once Render has completed the deployment, copy your service's URL (e.g., `https://xebia-lms-backend-xxxx.onrender.com`) and update your Vercel project environment variables:
+1. Go to your **Vercel Dashboard** > **xebia-lms-portal** > **Settings** > **Environment Variables**.
+2. Update **`NEXT_PUBLIC_API_URL`** to: `https://xebia-lms-backend-xxxx.onrender.com/api`
+3. Update **`NEXTAUTH_API_URL`** to: `https://xebia-lms-backend-xxxx.onrender.com/api`
+4. Redeploy your Vercel project to apply the changes.
+

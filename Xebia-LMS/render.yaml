@@ -7,6 +7,7 @@ services:
     healthCheckPath: /api/actuator/health
     envVars:
       - key: APP_CORS_ALLOWED_ORIGINS
-        value: https://your-frontend-domain.vercel.app
+        value: https://xebia-lms-portal-three.vercel.app
       - key: SPRING_PROFILES_ACTIVE
         value: demo
+
