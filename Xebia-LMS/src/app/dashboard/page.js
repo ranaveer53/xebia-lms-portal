@@ -9,6 +9,8 @@ import MetricCard from "../../components/common/MetricCard";
 import { useGetCourses } from "../../hooks/useCourses";
 import { useGetCategories } from "../../hooks/useCategories";
 import { SkeletonPulse, CourseCardSkeleton } from "../../components/common/Skeleton";
+import { useQuery } from "@tanstack/react-query";
+import { assessmentService } from "../../services/api";
 import {
   BookOpen,
   Award,
@@ -18,15 +20,31 @@ import {
   Flame,
   Activity,
   Compass,
-  Tag
+  Tag,
+  ClipboardList
 } from "lucide-react";
 
 export default function DashboardPage() {
   const { data: session } = useSession();
   const userName = session?.user?.name || "Consultant";
+  const userEmail = session?.user?.email || "";
 
   const { data: courses, isLoading: coursesLoading } = useGetCourses();
   const { data: categories, isLoading: categoriesLoading } = useGetCategories();
+
+  // Dynamic assessments query
+  const { data: assignedAssessments = [], isLoading: assessmentsLoading } = useQuery({
+    queryKey: ["assigned-assessments", userEmail],
+    queryFn: () => assessmentService.getAssessmentsForLearner(userEmail),
+    enabled: !!userEmail,
+  });
+
+  // Dynamic results query
+  const { data: submissions = [] } = useQuery({
+    queryKey: ["my-submissions", userEmail],
+    queryFn: () => assessmentService.getResults(userEmail),
+    enabled: !!userEmail,
+  });
 
   // Mock progress database corresponding to enrolled courses
   const enrollmentProgress = {
@@ -42,12 +60,19 @@ export default function DashboardPage() {
     return Object.keys(enrollmentProgress).length - getCompletedCount();
   };
 
-  // Recent learning telemetry activity stream
+  // Dynamically build activity feed
   const recentActivities = [
-    { id: 1, type: "completion", text: "Completed lesson 'App Router Directory Structure'", time: "2 hours ago" },
-    { id: 2, type: "enrollment", text: "Enrolled in 'Next.js Production Architecture'", time: "2 days ago" },
-    { id: 3, type: "assessment", text: "Scored 90% in 'Spring JPA Boot Camp Quiz'", time: "4 days ago" },
-  ];
+    ...submissions.map((sub) => ({
+      id: sub.id,
+      type: "assessment",
+      text: `${sub.passed ? "Passed" : "Completed"} assessment '${sub.assessmentTitle}' with ${sub.percentage}%`,
+      time: new Date(sub.submittedAt).toLocaleDateString()
+    })),
+    { id: "act-1", type: "completion", text: "Completed lesson 'App Router Directory Structure'", time: "2 hours ago" },
+    { id: "act-2", type: "enrollment", text: "Enrolled in 'Next.js Production Architecture'", time: "2 days ago" },
+  ].slice(0, 5); // Limit to top 5 activities
+
+  const completedBadgesCount = submissions.filter(s => s.passed).length;
 
   return (
     <>
@@ -82,9 +107,9 @@ export default function DashboardPage() {
         />
         <MetricCard
           title="Completed Badges"
-          value={coursesLoading ? "..." : getCompletedCount()}
+          value={completedBadgesCount}
           icon={Award}
-          trend="100% score"
+          trend={`${completedBadgesCount > 0 ? "100% pass score" : "No badges yet"}`}
           description="Syllabus segments fully completed"
           gradientScheme="primary"
         />
@@ -100,63 +125,115 @@ export default function DashboardPage() {
 
       {/* 3. Core Grid: Continue Learning vs Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        {/* Left Column: Continue Learning list */}
+        {/* Left Column: Continue Learning list & My Assessments */}
         <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-lg font-black text-primary flex items-center gap-2">
-            <span>Continue Learning</span>
-            <span className="px-2.5 py-0.5 text-[10px] bg-primary/10 rounded-full font-bold text-primary">Active</span>
-          </h2>
+          
+          {/* Continue Learning */}
+          <div className="space-y-4">
+            <h2 className="text-lg font-black text-primary flex items-center gap-2">
+              <span>Continue Learning</span>
+              <span className="px-2.5 py-0.5 text-[10px] bg-primary/10 rounded-full font-bold text-primary">Active</span>
+            </h2>
 
-          {coursesLoading ? (
-            <div className="space-y-4">
-              <CourseCardSkeleton />
-            </div>
-          ) : (
-            <div className="flex flex-col gap-4">
-              {courses?.filter((c) => enrollmentProgress[c.id]).map((course) => {
-                const progress = enrollmentProgress[course.id];
-                return (
-                  <Card key={course.id} className="hover:shadow-md transition-shadow">
-                    <CardBody className="p-5 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-                      <div className="space-y-2 flex-1 w-full min-w-0">
-                        <div className="flex items-center gap-3">
-                          <span className="px-2 py-0.5 bg-accent/10 border border-accent/25 rounded-md text-[9px] font-black text-accent uppercase tracking-wider">
-                            {course.level}
-                          </span>
-                          <span className="text-xs text-text-muted font-medium">{course.duration}</span>
-                        </div>
-                        <h3 className="text-base font-black text-foreground truncate leading-snug">{course.title}</h3>
-                        <p className="text-xs text-text-muted flex items-center gap-1.5 truncate font-medium">
-                          <ShieldCheck className="w-4 h-4 text-accent flex-shrink-0" />
-                          <span>Active lesson: {progress.lessonTitle}</span>
-                        </p>
-                        
-                        {/* Progress slider bar */}
-                        <div className="pt-2 flex items-center gap-3">
-                          <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-accent transition-all duration-300 rounded-full"
-                              style={{ width: `${progress.percentage}%` }}
-                            />
+            {coursesLoading ? (
+              <div className="space-y-4">
+                <CourseCardSkeleton />
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4">
+                {courses?.filter((c) => enrollmentProgress[c.id]).map((course) => {
+                  const progress = enrollmentProgress[course.id];
+                  return (
+                    <Card key={course.id} className="hover:shadow-md transition-shadow">
+                      <CardBody className="p-5 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                        <div className="space-y-2 flex-1 w-full min-w-0">
+                          <div className="flex items-center gap-3">
+                            <span className="px-2 py-0.5 bg-accent/10 border border-accent/25 rounded-md text-[9px] font-black text-accent uppercase tracking-wider">
+                              {course.level}
+                            </span>
+                            <span className="text-xs text-text-muted font-medium">{course.duration}</span>
                           </div>
-                          <span className="text-xs font-extrabold text-foreground">{progress.percentage}%</span>
+                          <h3 className="text-base font-black text-foreground truncate leading-snug">{course.title}</h3>
+                          <p className="text-xs text-text-muted flex items-center gap-1.5 truncate font-medium">
+                            <ShieldCheck className="w-4 h-4 text-accent flex-shrink-0" />
+                            <span>Active lesson: {progress.lessonTitle}</span>
+                          </p>
+                          
+                          {/* Progress slider bar */}
+                          <div className="pt-2 flex items-center gap-3">
+                            <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-accent transition-all duration-300 rounded-full"
+                                style={{ width: `${progress.percentage}%` }}
+                              />
+                            </div>
+                            <span className="text-xs font-extrabold text-foreground">{progress.percentage}%</span>
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="flex-shrink-0 w-full sm:w-auto">
-                        <Link href={`/learn/${course.slug}/${progress.currentLesson}`}>
-                          <Button variant="primary" size="sm" className="w-full justify-center">
-                            <span>Resume</span>
-                            <ArrowRight className="w-4 h-4 ml-1.5" />
+                        <div className="flex-shrink-0 w-full sm:w-auto">
+                          <Link href={`/learn/${course.slug}/${progress.currentLesson}`}>
+                            <Button variant="primary" size="sm" className="w-full justify-center">
+                              <span>Resume</span>
+                              <ArrowRight className="w-4 h-4 ml-1.5" />
+                            </Button>
+                          </Link>
+                        </div>
+                      </CardBody>
+                    </Card>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Assigned Assessments */}
+          {assignedAssessments.length > 0 && (
+            <div className="space-y-4 pt-2">
+              <h2 className="text-lg font-black text-primary flex items-center gap-2">
+                <ClipboardList className="w-5 h-5 text-accent" />
+                <span>My Assessments</span>
+                <span className="px-2.5 py-0.5 text-[10px] bg-accent/10 rounded-full font-bold text-accent">
+                  {assignedAssessments.length} Assigned
+                </span>
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {assignedAssessments.map((assessment) => {
+                  const hasSubmitted = submissions.find(s => s.assessmentId === assessment.id);
+                  return (
+                    <Card key={assessment.id} className={`hover:shadow-md transition-shadow border-l-4 ${hasSubmitted ? "border-l-emerald-500" : "border-l-accent"}`}>
+                      <CardBody className="p-5 flex flex-col gap-3 justify-between h-full">
+                        <div>
+                          <div className="flex items-center justify-between gap-2">
+                            <h3 className="font-black text-foreground text-sm line-clamp-1">{assessment.title}</h3>
+                            {hasSubmitted && (
+                              <span className={`text-[9px] font-black uppercase px-1.5 py-0.5 rounded ${hasSubmitted.passed ? "bg-emerald-50 text-emerald-700 border border-emerald-100" : "bg-rose-50 text-rose-700 border border-rose-100"}`}>
+                                {hasSubmitted.passed ? "Passed" : "Failed"} ({hasSubmitted.percentage}%)
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xs text-text-muted mt-1 line-clamp-2 leading-relaxed">{assessment.description}</p>
+                        </div>
+                        <div className="flex items-center gap-4 text-[10px] text-text-muted font-semibold">
+                          <span>{assessment.questions?.length || 0} Questions</span>
+                          <span>{assessment.durationMinutes} Min</span>
+                          <span>Passing Score: {assessment.passingScore}%</span>
+                        </div>
+                        <Link href={`/assessment/${assessment.id}`}>
+                          <Button variant={hasSubmitted ? "outline" : "primary"} size="sm" className="w-full justify-center mt-1">
+                            <span>{hasSubmitted ? "Retake Assessment" : "Start Assessment"}</span>
+                            <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                           </Button>
                         </Link>
-                      </div>
-                    </CardBody>
-                  </Card>
-                );
-              })}
+                      </CardBody>
+                    </Card>
+                  );
+                })}
+              </div>
             </div>
           )}
+
         </div>
 
         {/* Right Column: Recent Activity Feed */}

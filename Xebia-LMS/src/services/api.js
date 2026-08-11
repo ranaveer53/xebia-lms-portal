@@ -624,34 +624,177 @@ export const learnerCredentialService = {
   },
 };
 
+// Seed assessments
+export const seedAssessments = [
+  {
+    id: "assess-1",
+    title: "Next.js Fundamentals Quiz",
+    description: "Test your knowledge of Next.js App Router, SSR, and Client Components.",
+    courseId: "course-nextjs",
+    durationMinutes: 20,
+    passingScore: 70,
+    questions: [
+      { id: "q1", prompt: "What hook is used to access URL params in Next.js App Router?", options: ["useParams", "useRouter", "useQuery", "useSearchParams"], answer: "useParams" },
+      { id: "q2", prompt: "Which directive marks a component as a Client Component?", options: ['"use client"', '"use server"', '"use browser"', '"client only"'], answer: '"use client"' },
+      { id: "q3", prompt: "What folder holds the root layout in Next.js App Router?", options: ["pages/", "app/", "src/", "layouts/"], answer: "app/" }
+    ],
+    assignedTo: ["learner@xebia.com"],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: "assess-2",
+    title: "Spring Boot Basics Assessment",
+    description: "Core Spring Boot concepts including dependency injection and JPA.",
+    courseId: "course-springboot",
+    durationMinutes: 30,
+    passingScore: 65,
+    questions: [
+      { id: "q1", prompt: "Which annotation marks a class as a Spring REST controller?", options: ["@Controller", "@RestController", "@Service", "@Component"], answer: "@RestController" },
+      { id: "q2", prompt: "What annotation enables auto-configuration in Spring Boot?", options: ["@SpringBootApplication", "@EnableAutoConfig", "@SpringApp", "@AutoConfigure"], answer: "@SpringBootApplication" }
+    ],
+    assignedTo: ["learner@xebia.com"],
+    createdAt: new Date().toISOString()
+  }
+];
+
 export const assessmentService = {
   getAssessments: async () => {
     const remote = await request(`/assessments`);
     if (remote) return remote;
-    return [];
+    return await fetchDbData("lms_assessments", seedAssessments);
   },
 
   getAssessmentById: async (id) => {
     const remote = await request(`/assessments/${id}`);
     if (remote) return remote;
-    return null;
+    const list = await fetchDbData("lms_assessments", seedAssessments);
+    return list.find(a => a.id === id) || null;
+  },
+
+  getAssessmentsForLearner: async (learnerEmail) => {
+    const remote = await request(`/assessments/assigned?email=${encodeURIComponent(learnerEmail)}`);
+    if (remote) return remote;
+    const list = await fetchDbData("lms_assessments", seedAssessments);
+    return list.filter(a => a.assignedTo && a.assignedTo.includes(learnerEmail));
+  },
+
+  createAssessment: async (data) => {
+    const remote = await request("/assessments", { method: "POST", body: JSON.stringify(data) });
+    if (remote) return remote;
+    const list = await fetchDbData("lms_assessments", seedAssessments);
+    const newAssessment = {
+      ...data,
+      id: `assess-${Date.now()}`,
+      assignedTo: data.assignedTo || [],
+      createdAt: new Date().toISOString()
+    };
+    list.push(newAssessment);
+    await saveDbData("lms_assessments", list);
+    return newAssessment;
+  },
+
+  updateAssessment: async (id, data) => {
+    const remote = await request(`/assessments/${id}`, { method: "PUT", body: JSON.stringify(data) });
+    if (remote) return remote;
+    const list = await fetchDbData("lms_assessments", seedAssessments);
+    const index = list.findIndex(a => a.id === id);
+    if (index === -1) throw new Error("Assessment not found");
+    list[index] = { ...list[index], ...data };
+    await saveDbData("lms_assessments", list);
+    return list[index];
+  },
+
+  assignToLearners: async (assessmentId, learnerEmails) => {
+    const remote = await request(`/assessments/${assessmentId}/assign`, {
+      method: "POST",
+      body: JSON.stringify({ learnerEmails })
+    });
+    if (remote) return remote;
+    const list = await fetchDbData("lms_assessments", seedAssessments);
+    const index = list.findIndex(a => a.id === assessmentId);
+    if (index === -1) throw new Error("Assessment not found");
+    const existing = list[index].assignedTo || [];
+    const merged = [...new Set([...existing, ...learnerEmails])];
+    list[index] = { ...list[index], assignedTo: merged };
+    await saveDbData("lms_assessments", list);
+    return list[index];
+  },
+
+  unassignFromLearner: async (assessmentId, learnerEmail) => {
+    const remote = await request(`/assessments/${assessmentId}/unassign`, {
+      method: "POST",
+      body: JSON.stringify({ learnerEmail })
+    });
+    if (remote) return remote;
+    const list = await fetchDbData("lms_assessments", seedAssessments);
+    const index = list.findIndex(a => a.id === assessmentId);
+    if (index === -1) throw new Error("Assessment not found");
+    list[index] = { ...list[index], assignedTo: (list[index].assignedTo || []).filter(e => e !== learnerEmail) };
+    await saveDbData("lms_assessments", list);
+    return list[index];
+  },
+
+  deleteAssessment: async (id) => {
+    const remote = await request(`/assessments/${id}`, { method: "DELETE" });
+    if (remote) return true;
+    const list = await fetchDbData("lms_assessments", seedAssessments);
+    await saveDbData("lms_assessments", list.filter(a => a.id !== id));
+    return true;
   },
 
   submitAssessment: async (id, payload) => {
     const remote = await request(`/assessments/${id}/submit`, {
       method: "POST",
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload)
     });
     if (remote) return remote;
-    return null;
+    
+    // Score locally
+    const assessments = await fetchDbData("lms_assessments", seedAssessments);
+    const assessment = assessments.find(a => a.id === id);
+    let score = 0;
+    const total = assessment?.questions?.length || 0;
+    if (assessment?.questions) {
+      assessment.questions.forEach(q => {
+        if (payload.answers?.[q.id] === q.answer) score++;
+      });
+    }
+    const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
+    const passed = percentage >= (assessment?.passingScore || 70);
+    const submission = {
+      id: `sub-${Date.now()}`,
+      assessmentId: id,
+      assessmentTitle: assessment?.title || "",
+      learnerId: payload.learnerId,
+      learnerEmail: payload.learnerEmail,
+      answers: payload.answers,
+      score,
+      total,
+      percentage,
+      passed,
+      submittedAt: new Date().toISOString()
+    };
+    const submissions = await fetchDbData("lms_assessment_submissions", []);
+    submissions.push(submission);
+    await saveDbData("lms_assessment_submissions", submissions);
+    return submission;
   },
 
-  getResults: async () => {
-    const remote = await request(`/assessments/results`);
+  getResults: async (learnerEmail) => {
+    const remote = await request(`/assessments/results${learnerEmail ? `?email=${encodeURIComponent(learnerEmail)}` : ""}`);
     if (remote) return remote;
-    return [];
+    const submissions = await fetchDbData("lms_assessment_submissions", []);
+    if (learnerEmail) return submissions.filter(s => s.learnerEmail === learnerEmail);
+    return submissions;
   },
+
+  getAllResults: async () => {
+    const remote = await request("/assessments/results/all");
+    if (remote) return remote;
+    return await fetchDbData("lms_assessment_submissions", []);
+  }
 };
+
 
 export const analyticsService = {
   getExecutiveSummary: async (params) => {
