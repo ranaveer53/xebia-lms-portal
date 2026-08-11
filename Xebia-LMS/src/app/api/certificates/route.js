@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
 import clientPromise from '@/services/mongodb';
-import { v4 as uuidv4 } from 'uuid';
 
 const DB_NAME = 'employeeDB';
-const COLLECTION = 'lms_ts_classes';
+const COLLECTION = 'lms_ts_certificates';
 
 function cleanDoc(doc) {
   if (!doc) return doc;
@@ -18,20 +17,6 @@ export async function GET() {
     const db = client.db(DB_NAME);
     const docs = await db.collection(COLLECTION).find({}).toArray();
     return NextResponse.json(docs.map(cleanDoc));
-  } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-}
-
-export async function POST(req) {
-  try {
-    const data = await req.json();
-    const newDoc = { id: uuidv4(), createdAt: new Date().toISOString(), ...data };
-    const client = await clientPromise;
-    if (!client) return NextResponse.json(newDoc);
-    const db = client.db(DB_NAME);
-    await db.collection(COLLECTION).insertOne({ ...newDoc });
-    return NextResponse.json(newDoc);
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
