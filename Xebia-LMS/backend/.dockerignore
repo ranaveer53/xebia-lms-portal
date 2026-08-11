@@ -1,5 +1,25 @@
-target
-.git
-.mvn/wrapper/maven-wrapper.jar
-*.log
-data
+# Exclude build outputs (they get rebuilt inside Docker)
+target/
+prebuilt/
+
+# Exclude IDE / OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Exclude test reports and docs
+*.md
+docs/
+
+# Exclude uploads directory
+uploads/
+
+# Exclude git history
+.git/
+.gitignore
+
+# Exclude other environment files
+.env
+.env.*

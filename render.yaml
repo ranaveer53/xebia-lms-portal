@@ -10,3 +10,5 @@ services:
         value: https://xebia-lms-portal-three.vercel.app
       - key: SPRING_PROFILES_ACTIVE
         value: demo
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx384m -Xms128m
