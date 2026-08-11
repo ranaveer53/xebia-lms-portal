@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: xebia-lms-backend
+    runtime: docker
+    rootDir: Xebia-LMS/backend
+    plan: free
+    healthCheckPath: /api/actuator/health
+    envVars:
+      - key: APP_CORS_ALLOWED_ORIGINS
+        value: https://xebia-lms-portal-three.vercel.app
+      - key: SPRING_PROFILES_ACTIVE
+        value: demo
