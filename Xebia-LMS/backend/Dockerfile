@@ -1,6 +1,9 @@
 FROM eclipse-temurin:17-jdk-jammy AS builder
 WORKDIR /app
 
+# Install curl and unzip so custom mvnw wrapper script can download and extract Maven 3.9.6
+RUN apt-get update && apt-get install -y curl unzip && rm -rf /var/lib/apt/lists/*
+
 # 1. Copy Maven wrapper & config first (cached layer – only re-run if pom.xml changes)
 COPY mvnw mvnw
 COPY .mvn .mvn
