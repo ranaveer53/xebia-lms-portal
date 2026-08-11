@@ -3,6 +3,9 @@ services:
     name: xebia-lms-backend
     image:
       url: ghcr.io/ranaveer53/xebia-lms-backend:latest
+      # GitHub Container Registry credentials (stored as Render environment group)
+      creds:
+        fromRegistryCredentialId: ghcr-credentials
     plan: free
     healthCheckPath: /api/actuator/health
     envVars:
@@ -12,3 +15,5 @@ services:
         value: demo
       - key: JAVA_TOOL_OPTIONS
         value: -Xmx384m -Xms128m
+      - key: MONGODB_URI
+        sync: false
