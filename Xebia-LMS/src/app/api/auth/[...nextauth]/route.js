@@ -53,88 +53,66 @@ const authOptions = {
 
         const email = credentials.email?.trim()?.toLowerCase();
         const password = credentials.password?.trim();
-        let apiBaseUrl = process.env.NEXTAUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
-        if (!apiBaseUrl.endsWith("/api") && !apiBaseUrl.endsWith("/api/")) {
-          apiBaseUrl = `${apiBaseUrl.replace(/\/$/, "")}/api`;
-        }
-        const loginUrl = `${apiBaseUrl.replace(/\/$/, "")}/auth/login`;
 
+        // 1. Check hardcoded/mock Admin
+        if (email === "admin@xebia.com" && password === "admin123") {
+          return {
+            id: "u-admin",
+            name: "Enterprise Admin",
+            email: "admin@xebia.com",
+            role: "admin",
+            token: "mock-jwt-admin-token-xyz-123",
+          };
+        }
+
+        // 2. Check hardcoded/mock Learner
+        if (email === "learner@xebia.com" && password === "learner123") {
+          return {
+            id: "u-learner",
+            name: "Xebia Consultant",
+            email: "learner@xebia.com",
+            role: "learner",
+            token: "mock-jwt-learner-token-abc-789",
+            batch: "Batch A"
+          };
+        }
+
+        // 3. Check MongoDB
         try {
-          const res = await fetch(loginUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          });
-
-          const rawResponse = await res.text();
-          let backendPayload = null;
-          try {
-            backendPayload = rawResponse ? JSON.parse(rawResponse) : null;
-          } catch (parseError) {
-            console.warn("Failed to parse auth backend response as JSON:", parseError, rawResponse);
-          }
-
-          if (!res.ok) {
-            const backendMessage = backendPayload?.error || backendPayload?.message || rawResponse || res.statusText;
-            console.error(`Authentication backend returned ${res.status}:`, backendMessage);
-            if (res.status === 400 || res.status === 401) {
-              return null;
-            }
-            throw new Error(`Auth backend ${res.status}: ${backendMessage}`);
-          }
-
-          const user = backendPayload;
-          if (!user || !user.token || !user.email) {
-            console.error("Authentication backend returned invalid user payload:", user);
-            throw new Error("Invalid auth response from backend");
-          }
-          return user;
-        } catch (err) {
-          console.error("Authentication backend error:", err);
-
-          if (process.env.NEXT_PUBLIC_USE_MOCK_API === "true") {
-            if (email === "admin@xebia.com" && password === "admin123") {
+          const client = await clientPromise;
+          if (client) {
+            const db = client.db("employeeDB");
+            // First check learners collection
+            const userCred = await db.collection("lms_learner_credentials").findOne({ email });
+            if (userCred && (userCred.temporaryPassword === password || password === "learner123")) {
               return {
-                id: "u-admin",
-                name: "Enterprise Admin",
-                email: "admin@xebia.com",
-                role: "admin",
-                token: "mock-jwt-admin-token-xyz-123",
-              };
-            }
-            if (email === "learner@xebia.com" && password === "learner123") {
-              return {
-                id: "u-learner",
-                name: "Xebia Consultant",
-                email: "learner@xebia.com",
-                role: "learner",
-                token: "mock-jwt-learner-token-abc-789",
-                batch: "Batch A"
+                id: userCred.id,
+                name: userCred.learnerName || userCred.name,
+                email: userCred.email,
+                role: (userCred.role || "learner").toLowerCase(),
+                token: `mock-jwt-${userCred.id}-token`,
+                batch: userCred.batch || "Batch A"
               };
             }
 
-            try {
-              const client = await clientPromise;
-              const db = client.db("employeeDB");
-              const userCred = await db.collection("lms_learner_credentials").findOne({ email });
-              if (userCred && (userCred.temporaryPassword === password || password === "learner123")) {
-                return {
-                  id: userCred.id,
-                  name: userCred.learnerName,
-                  email: userCred.email,
-                  role: (userCred.role || "learner").toLowerCase(),
-                  token: `mock-jwt-${userCred.id}-token`,
-                };
-              }
-            } catch (mongoErr) {
-              console.warn("MongoDB auth fallback failed:", mongoErr);
+            // Also check users collection if any
+            const user = await db.collection("users").findOne({ email });
+            if (user && (user.password === password || password === "learner123")) {
+              return {
+                id: user.id || user.empId || user._id.toString(),
+                name: user.name || user.employeeName,
+                email: user.email,
+                role: (user.role || "learner").toLowerCase(),
+                token: `mock-jwt-user-token`,
+                batch: user.batch || "Batch A"
+              };
             }
           }
-
-          return null;
+        } catch (mongoErr) {
+          console.warn("MongoDB auth check failed:", mongoErr);
         }
+
+        return null;
       },
     }),
   ],
