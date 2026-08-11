@@ -50,6 +50,6 @@ lerna-debug.log*
 .git_backup/
 
 # Local uploads and temporary files
-backend/uploads/
-uploads/
+**/backend/uploads/
+/uploads/
 cookies.txt
