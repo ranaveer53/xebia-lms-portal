@@ -15,7 +15,9 @@ if [ ! -f "$MAVEN_HOME/bin/mvn" ]; then
     mkdir -p "$(dirname "$0")/.mvn/temp_extract"
     unzip -q "$MAVEN_ZIP" -d "$(dirname "$0")/.mvn/temp_extract"
     mv "$(dirname "$0")/.mvn/temp_extract/apache-maven-$MAVEN_VERSION" "$MAVEN_HOME"
+    chmod +x "$MAVEN_HOME/bin/mvn"
     rm -rf "$(dirname "$0")/.mvn/temp_extract" "$MAVEN_ZIP"
 fi
 
 exec "$MAVEN_HOME/bin/mvn" "$@"
+
