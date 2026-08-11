@@ -1,8 +1,8 @@
 services:
   - type: web
     name: xebia-lms-backend
-    runtime: docker
-    rootDir: Xebia-LMS/backend
+    image:
+      url: ghcr.io/ranaveer53/xebia-lms-backend:latest
     plan: free
     healthCheckPath: /api/actuator/health
     envVars:
