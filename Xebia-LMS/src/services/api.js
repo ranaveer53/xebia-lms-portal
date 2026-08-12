@@ -595,6 +595,22 @@ export const learnerCredentialService = {
       throw new Error("A learner credential already exists for this email or username.");
     }
 
+    // Resolve human-readable batch name from batchId (e.g. "Batch A" from "batch-a")
+    // Store BOTH batch (human name) and batchId for flexibility
+    const rawBatchId = data.batchId?.trim() || "default-batch";
+    // Try to derive a human-readable name from batchId
+    // e.g. "batch-a" -> "Batch A", "default-batch" -> "Batch A"
+    let batchName = data.batchName?.trim() || "";
+    if (!batchName) {
+      if (rawBatchId.startsWith("batch-")) {
+        batchName = "Batch " + rawBatchId.replace("batch-", "").toUpperCase();
+      } else if (rawBatchId === "default-batch") {
+        batchName = "Batch A"; // default so new learners see standard assessments
+      } else {
+        batchName = rawBatchId; // use raw value as fallback
+      }
+    }
+
     const newCredential = {
       id: `learner-${Date.now()}`,
       learnerName: data.learnerName.trim(),
@@ -604,7 +620,8 @@ export const learnerCredentialService = {
       role: "LEARNER",
       status: "ACTIVE",
       tenantId: data.tenantId?.trim() || "xebia-enterprise",
-      batchId: data.batchId?.trim() || "default-batch",
+      batchId: rawBatchId,
+      batch: batchName,  // Human-readable batch name used for assessment filtering
       forcePasswordReset: data.forcePasswordReset ?? true,
       createdAt: new Date().toISOString(),
     };
@@ -613,6 +630,7 @@ export const learnerCredentialService = {
     await saveDbData("lms_learner_credentials", list);
     return newCredential;
   },
+
 
   deleteLearnerCredential: async (id) => {
     const remote = await request(`/iam/learner-credentials/${id}`, { method: "DELETE" });

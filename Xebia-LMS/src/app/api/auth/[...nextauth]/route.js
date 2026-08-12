@@ -82,29 +82,50 @@ const authOptions = {
           const client = await clientPromise;
           if (client) {
             const db = client.db("employeeDB");
-            // First check learners collection
+
+            // Helper: resolve human-readable batch name from batchId or batch field
+            async function resolveBatchName(cred) {
+              // If already has a human-readable batch name (e.g. "Batch A"), use it
+              if (cred.batch && !cred.batch.startsWith("default") && cred.batch.length > 2) {
+                return cred.batch;
+              }
+              // Try to resolve from batchId via lms_batches collection
+              const batchId = cred.batchId || cred.batch;
+              if (batchId) {
+                try {
+                  const batchDoc = await db.collection("lms_batches").findOne({ id: batchId });
+                  if (batchDoc && batchDoc.batchName) return batchDoc.batchName;
+                } catch (_) {}
+              }
+              // Default fallback so learner can still see "Batch A" assessments
+              return "Batch A";
+            }
+
+            // Check learner credentials collection
             const userCred = await db.collection("lms_learner_credentials").findOne({ email });
             if (userCred && (userCred.temporaryPassword === password || password === "learner123")) {
+              const batchName = await resolveBatchName(userCred);
               return {
                 id: userCred.id,
                 name: userCred.learnerName || userCred.name,
                 email: userCred.email,
                 role: (userCred.role || "learner").toLowerCase(),
                 token: `mock-jwt-${userCred.id}-token`,
-                batch: userCred.batch || "Batch A"
+                batch: batchName,
               };
             }
 
             // Also check users collection if any
             const user = await db.collection("users").findOne({ email });
             if (user && (user.password === password || password === "learner123")) {
+              const batchName = await resolveBatchName(user);
               return {
                 id: user.id || user.empId || user._id.toString(),
                 name: user.name || user.employeeName,
                 email: user.email,
                 role: (user.role || "learner").toLowerCase(),
                 token: `mock-jwt-user-token`,
-                batch: user.batch || "Batch A"
+                batch: batchName,
               };
             }
           }

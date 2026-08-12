@@ -29,6 +29,7 @@ export interface Assessment {
   subject: string;
   batch: string;
   batches?: string[];
+  assignedTo?: string[];  // Optional list of learner emails for direct assignment
   instructions: string;
   questionType: QuestionType;
   questions: Question[];

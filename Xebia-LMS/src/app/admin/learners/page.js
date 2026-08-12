@@ -42,7 +42,8 @@ export default function AdminLearnersPage() {
     username: "",
     password: "",
     tenantId: "xebia-enterprise",
-    batchId: "default-batch",
+    batchId: "batch-a",
+    batchName: "Batch A",
     forcePasswordReset: true,
   });
 
@@ -53,7 +54,8 @@ export default function AdminLearnersPage() {
       username: "",
       password: "",
       tenantId: "xebia-enterprise",
-      batchId: "default-batch",
+      batchId: "batch-a",
+      batchName: "Batch A",
       forcePasswordReset: true,
     });
     setCreatedCredential(null);
@@ -92,6 +94,7 @@ export default function AdminLearnersPage() {
         password: form.password,
         tenantId: form.tenantId,
         batchId: form.batchId,
+        batchName: form.batchName,
         forcePasswordReset: form.forcePasswordReset,
       },
       {
@@ -170,8 +173,8 @@ export default function AdminLearnersPage() {
     },
     {
       header: "Batch Group",
-      key: "batchId",
-      render: (row) => <span className="font-bold text-foreground/80 text-[10px] block uppercase">{row.batchId}</span>
+      key: "batch",
+      render: (row) => <span className="font-bold text-foreground/80 text-[10px] block uppercase">{row.batch || row.batchId}</span>
     },
     {
       header: "Credential Status",
@@ -355,16 +358,31 @@ export default function AdminLearnersPage() {
                 onChange={(e) => updateField("tenantId", e.target.value)}
               />
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-foreground">Batch Academy Group</label>
+                <label className="text-xs font-bold text-foreground">Assign to Batch</label>
                 <select
-                  value={form.batchId}
-                  onChange={(e) => updateField("batchId", e.target.value)}
+                  value={form.batchName}
+                  onChange={(e) => {
+                    const selected = e.target.value;
+                    // Map human name to batchId slug
+                    const idMap = {
+                      "Batch A": "batch-a",
+                      "Batch B": "batch-b",
+                      "Batch C": "batch-c",
+                      "Batch D": "batch-d",
+                      "Batch E": "batch-e",
+                    };
+                    updateField("batchName", selected);
+                    updateField("batchId", idMap[selected] || "batch-a");
+                  }}
                   className="w-full px-3 py-2 border border-border bg-white rounded-xl text-sm focus:outline-none focus:border-primary/50 cursor-pointer"
                 >
-                  <option value="default-batch">Default Batch</option>
-                  <option value="frontend-batch">Frontend Academy</option>
-                  <option value="cloud-batch">Cloud Engineering</option>
+                  <option value="Batch A">Batch A</option>
+                  <option value="Batch B">Batch B</option>
+                  <option value="Batch C">Batch C</option>
+                  <option value="Batch D">Batch D</option>
+                  <option value="Batch E">Batch E</option>
                 </select>
+                <p className="text-[10px] text-text-muted">Must match the batch assigned to assessments</p>
               </div>
             </div>
 

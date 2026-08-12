@@ -3,12 +3,28 @@ import clientPromise from "@/services/mongodb";
 
 const DB_NAME = "employeeDB";
 
+async function resolveBatchName(db, cred) {
+  // If already has a human-readable batch name (e.g. "Batch A"), use it directly
+  if (cred.batch && !cred.batch.startsWith("default") && cred.batch.length > 2) {
+    return cred.batch;
+  }
+  // Try to resolve from batchId via lms_batches collection
+  const batchId = cred.batchId || cred.batch;
+  if (batchId) {
+    try {
+      const batchDoc = await db.collection("lms_batches").findOne({ id: batchId });
+      if (batchDoc && batchDoc.batchName) return batchDoc.batchName;
+    } catch (_) {}
+  }
+  // Default so learner can always see "Batch A" assessments
+  return "Batch A";
+}
+
 export async function POST(request) {
   try {
     const { email, password, role } = await request.json();
     const cleanEmail = email?.trim()?.toLowerCase();
     const cleanPassword = password?.trim();
-    const cleanRole = role?.trim()?.toLowerCase();
 
     // 1. Mock Admin check
     if (cleanEmail === "admin@xebia.com" && cleanPassword === "admin123") {
@@ -37,28 +53,31 @@ export async function POST(request) {
     const client = await clientPromise;
     if (client) {
       const db = client.db(DB_NAME);
+
       const userCred = await db.collection("lms_learner_credentials").findOne({ email: cleanEmail });
       if (userCred && (userCred.temporaryPassword === cleanPassword || cleanPassword === "learner123")) {
+        const batchName = await resolveBatchName(db, userCred);
         return NextResponse.json({
           id: userCred.id,
           name: userCred.learnerName || userCred.name,
           email: userCred.email,
           role: (userCred.role || "learner").toLowerCase(),
           token: `mock-jwt-${userCred.id}-token`,
-          batch: userCred.batch || "Batch A"
+          batch: batchName,
         });
       }
 
       // Check generic users collection
       const user = await db.collection("users").findOne({ email: cleanEmail });
       if (user && (user.password === cleanPassword || cleanPassword === "learner123")) {
+        const batchName = await resolveBatchName(db, user);
         return NextResponse.json({
           id: user.id || user.empId || user._id.toString(),
           name: user.name || user.employeeName,
           email: user.email,
           role: (user.role || "learner").toLowerCase(),
           token: `mock-jwt-user-token`,
-          batch: user.batch || "Batch A"
+          batch: batchName,
         });
       }
     }
