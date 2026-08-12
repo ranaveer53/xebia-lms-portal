@@ -36,7 +36,35 @@ export async function PATCH(request, { params }) {
         { $set: patch },
         { returnDocument: "after" }
       );
-      if (result) return NextResponse.json(cleanDoc(result));
+      if (result) {
+        const submission = result;
+        // Auto-generate certificate if score >= 90%
+        if (submission.marksObtained !== undefined && submission.totalMarks) {
+          const percentage = (submission.marksObtained / submission.totalMarks) * 100;
+          if (percentage >= 90 && submission.learnerId && submission.assessmentId) {
+            const existingCert = await db.collection("lms_ts_certificates").findOne({
+              studentId: submission.learnerId,
+              assessmentId: submission.assessmentId
+            });
+            
+            if (!existingCert) {
+              const certDoc = {
+                id: `cert-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+                studentId: submission.learnerId,
+                studentName: submission.learnerName || 'Student',
+                assessmentId: submission.assessmentId,
+                assessmentTitle: submission.assessmentTitle || 'Assessment',
+                subject: submission.subject || 'Subject',
+                batch: submission.batch || 'General',
+                issuedAt: new Date().toISOString(),
+                percentage
+              };
+              await db.collection("lms_ts_certificates").insertOne(certDoc);
+            }
+          }
+        }
+        return NextResponse.json(cleanDoc(submission));
+      }
     }
 
     return NextResponse.json({ id, ...patch });

@@ -89,6 +89,16 @@ export default function EventsPage() {
         fetchedEvents = await apiService.getEvents(filters);
       }
 
+      // Filter events by batch restrictions for learners
+      if (currentUser.role === "learner") {
+        const studentBatch = currentUser.batch?.trim().toLowerCase();
+        fetchedEvents = fetchedEvents.filter(event => {
+          if (!event.batchRestrictions || event.batchRestrictions.length === 0) return true; // Open to all
+          if (!studentBatch) return false; // Event is restricted but learner has no batch
+          return event.batchRestrictions.some(b => b.trim().toLowerCase() === studentBatch);
+        });
+      }
+
       setEvents(fetchedEvents);
 
       // Collect all categories and departments dynamically for options
