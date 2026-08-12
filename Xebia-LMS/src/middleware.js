@@ -6,8 +6,8 @@ export default withAuth(
     const token = req.nextauth.token;
     const isAdminRoute = req.nextUrl.pathname.startsWith("/admin");
 
-    // Block non-admin users from accessing the admin space
-    if (isAdminRoute && token?.role !== "admin") {
+    // Block non-admin and non-teacher users from accessing the admin space
+    if (isAdminRoute && token?.role !== "admin" && token?.role !== "teacher") {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
   },
