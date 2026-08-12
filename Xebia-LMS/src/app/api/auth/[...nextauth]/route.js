@@ -77,6 +77,18 @@ const authOptions = {
           };
         }
 
+        // 2b. Check hardcoded/mock Teacher
+        if (email === "teacher@xebia.com" && password === "teacher123") {
+          return {
+            id: "u-teacher",
+            name: "Xebia Instructor",
+            email: "teacher@xebia.com",
+            role: "teacher",
+            token: "mock-jwt-teacher-token-def-456",
+            batch: "Batch A"
+          };
+        }
+
         // 3. Check MongoDB
         try {
           const client = await clientPromise;

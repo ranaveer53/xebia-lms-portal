@@ -49,6 +49,18 @@ export async function POST(request) {
       });
     }
 
+    // 3. Mock Teacher check
+    if (cleanEmail === "teacher@xebia.com" && cleanPassword === "teacher123") {
+      return NextResponse.json({
+        id: "u-teacher",
+        name: "Xebia Instructor",
+        email: "teacher@xebia.com",
+        role: "teacher",
+        token: "mock-jwt-teacher-token-def-456",
+        batch: "Batch A"
+      });
+    }
+
     // 3. MongoDB check
     const client = await clientPromise;
     if (client) {
