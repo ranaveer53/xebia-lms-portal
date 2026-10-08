@@ -13,7 +13,7 @@ import java.util.*;
  * Seeds the H2 database with initial demo data on first run.
  * Skips seeding if data already exists (file-based H2 persists across restarts).
  */
-@Component
+//@Component
 public class DataSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
