@@ -1,5 +1,5 @@
-# Stage 1: Build the application using official Maven image (with JDK 17 & Maven 3.9.6 pre-installed)
-FROM maven:3.9.6-eclipse-temurin-17-jammy AS builder
+# Stage 1: Build the application using official Maven image (with JDK 17 & Maven 3.9 pre-installed)
+FROM maven:3.9-eclipse-temurin-17 AS builder
 WORKDIR /app
 
 # 1. Copy pom.xml and cache dependencies (cached layer)
